@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Happy Birthday Skye!</title>
   
+  <!-- Open Graph Meta Tags for Social Media Sharing -->
+  <meta property="og:title" content="Happy Birthday Skye!" />
+  <meta property="og:description" content="Happy birthday Skye, I love you!" />
+  <meta property="og:image" content="img/IMG_2811.jpeg" />
+  <meta property="og:url" content="https://yourusername.github.io/your-repo-name/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -30,6 +38,12 @@
       background-color: #ffe6e6; /* Light pink background */
       overflow-x: hidden;
       position: relative;
+      padding-top: 80px; /* Adjust based on navbar height */
+    }
+
+    /* Enable Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
     }
 
     /* Background Canvas */
@@ -98,12 +112,13 @@
       margin: 10px auto;
       max-width: 600px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.3s;
+      transition: transform 0.2s, background-color 0.3s, border-color 0.3s;
     }
 
     .interactive-message:hover {
       transform: scale(1.05);
       background-color: #ffe6e6;
+      border-color: #ff9999; /* Lighter red */
     }
 
     .hidden-text {
@@ -146,7 +161,8 @@
 
     .surprise-button:hover {
       opacity: 0.8;
-      transform: scale(1.05);
+      transform: scale(1.05) rotate(5deg);
+      transition: opacity 0.3s, transform 0.3s;
     }
 
     /* Modal Styles */
@@ -394,6 +410,144 @@
       .swiper-container {
         height: 250px;
       }
+
+      /* Adjust Love Quote Rotator for Mobile */
+      #loveQuotes {
+        padding: 15px;
+      }
+
+      #loveQuotes h3 {
+        font-size: 1.5rem;
+      }
+
+      #loveQuotes p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Love Quote Rotator Styles */
+    #loveQuotes {
+      background-color: #fff0f0;
+      border: 2px solid #ffcccc;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    #loveQuotes h3 {
+      font-family: 'Pacifico', cursive;
+    }
+
+    #currentQuote {
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* Confetti Styles */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f472b6; /* Pink confetti */
+      opacity: 0.7;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Love Story Section Styles */
+    #loveStory {
+      background-color: #fff0f0;
+      border: 2px solid #ffcccc;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    #loveStory:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    #loveStory h3 {
+      font-family: 'Pacifico', cursive;
+      animation: pulse 2s infinite;
+    }
+
+    #loveStory p {
+      line-height: 1.6;
+      color: #555;
+    }
+
+    #loveStory img {
+      margin-top: 15px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    #loveStory img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Pulse Animation for Headers */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Fade-In Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    /* Rotate Surprise Buttons on Hover */
+    .surprise-button:hover {
+      transform: scale(1.05) rotate(5deg);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    /* Interactive Messages Border Color Transition */
+    .interactive-message {
+      transition: transform 0.2s, background-color 0.3s, border-color 0.3s;
+    }
+
+    .interactive-message:hover {
+      border-color: #ff9999; /* Lighter red */
     }
   </style>
   
@@ -405,6 +559,16 @@
   
 </head>
 <body class="flex flex-col items-center justify-start min-h-screen relative">
+
+  <!-- Navigation Menu -->
+  <nav class="w-full bg-pink-200 shadow-md fixed top-0 left-0 z-40">
+    <ul class="flex justify-center space-x-6 py-4">
+      <li><a href="#overlayMessage" class="text-lg font-medium hover:text-pink-500">Home</a></li>
+      <li><a href="#loveQuotes" class="text-lg font-medium hover:text-pink-500">Quotes</a></li>
+      <li><a href="#loveStory" class="text-lg font-medium hover:text-pink-500">Our Story</a></li>
+      <li><a href="#surpriseMessages" class="text-lg font-medium hover:text-pink-500">Surprises</a></li>
+    </ul>
+  </nav>
 
   <!-- Background Canvas for Hearts Animation -->
   <canvas id="heartCanvas"></canvas>
@@ -423,13 +587,13 @@
   </div>
 
   <!-- Slideshow Carousel -->
-  <div class="swiper-container">
+  <div class="swiper-container fade-in-section">
     <div class="swiper-wrapper">
       <!-- Dynamically added slides below -->
       <!-- Slide 1 -->
       <div class="swiper-slide">
-        <a href="img/Pic1.jpg" data-lightbox="birthday-carousel">
-          <img src="img/Pic1.jpg" alt="Photo 1">
+        <a href="img/pic1.jpg" data-lightbox="birthday-carousel">
+          <img src="img/pic1.jpg" alt="Photo 1">
         </a>
       </div>
       <!-- Slide 2 -->
@@ -620,8 +784,14 @@
     <div class="swiper-button-next"></div>
   </div>
 
+  <!-- Love Quote Rotator -->
+  <div id="loveQuotes" class="mt-10 max-w-2xl text-center fade-in-section">
+    <h3 class="text-2xl font-semibold animated-header">Our Love in Words</h3>
+    <p id="currentQuote" class="text-lg italic text-pink-600">"Love is composed of a single soul inhabiting two bodies." - Aristotle</p>
+  </div>
+
   <!-- Typewriter Effect -->
-  <div id="typewriter"></div>
+  <div id="typewriter" class="fade-in-section"></div>
 
   <!-- Interactive Messages -->
   <div class="interactive-message">
@@ -681,6 +851,18 @@
     <div id="surprise8" class="hidden-surprise text-center text-lg text-red-600">You may not be the best at carrying a Domino’s pizza out of the car, but that’s okay with me ❤️</div>
     <!-- Removed surprise9 to match 8 buttons -->
   </div>
+
+  <!-- Love Story Section -->
+  <div id="loveStory" class="mt-10 max-w-3xl bg-pink-100 border-2 border-pink-300 rounded-lg p-6 fade-in-section">
+    <h3 class="text-2xl font-semibold text-pink-700 mb-4">Our Journey Together</h3>
+    <p class="text-lg text-pink-800 mb-4">
+      From the moment we met, I knew there was something incredibly special about you. Our first date at the Epic Movie theater was unforgettable, despite the movie being less than stellar. Every moment since then has been filled with laughter, love, and countless beautiful memories. Whether we're jamming to Taylor Swift, planning pranks, or simply enjoying a lazy Sunday, being with you feels like home.
+    </p>
+    <img src="img/love-story.jpg" alt="Our Love Story" class="w-full h-64 object-cover rounded-md">
+  </div>
+
+  <!-- Confetti Container -->
+  <div id="confettiContainer" class="confetti-container"></div>
 
   <!-- Modal for Birthday Message -->
   <div id="birthdayModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -745,10 +927,11 @@
       const closeBirthdayModal = document.getElementById('closeBirthdayModal');
       const modalClose = document.querySelector('.modal-close');
 
-      // Function to close the modal
+      // Function to close the modal and trigger confetti
       function closeModal() {
         birthdayModal.classList.remove('active');
         birthdayModal.classList.add('hidden');
+        createConfetti();
       }
 
       // Event listeners for closing the modal
@@ -792,11 +975,11 @@
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
-      // Heart Class
+      // Heart Class with Optional Position
       class Heart {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = canvas.height + 20;
+        constructor(x = Math.random() * canvas.width, y = canvas.height + 20) {
+          this.x = x;
+          this.y = y;
           this.size = Math.random() * 20 + 10;
           this.speed = Math.random() * 2 + 1;
           this.opacity = Math.random() * 0.5 + 0.5;
@@ -846,6 +1029,19 @@
       animateHearts();
       setInterval(generateHearts, 500); // Add new hearts every 0.5 seconds
 
+      // Interactive Heart Generation on Click
+      canvas.addEventListener('click', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        createHeart(x, y);
+      });
+
+      function createHeart(x, y) {
+        const heart = new Heart(x, y);
+        hearts.push(heart);
+      }
+
       // Initialize Swiper Carousel with slidesPerView:1
       var swiper = new Swiper('.swiper-container', {
         loop: true,
@@ -866,6 +1062,76 @@
         // Responsive breakpoints can be added if needed
       });
 
+      // Love Quote Rotator
+      const quotes = [
+        '"Love is composed of a single soul inhabiting two bodies." - Aristotle',
+        '"You are the finest, loveliest, tenderest, and most beautiful person I have ever known—and even that is an understatement." - F. Scott Fitzgerald',
+        '"I have waited for you, longer than you can imagine." - Unknown',
+        '"Every moment without you feels like eternity." - Unknown',
+        '"You are my today and all of my tomorrows." - Leo Christopher',
+        '"I love you not only for what you are but for what I am when I am with you." - Roy Croft',
+        '"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine." - Maya Angelou',
+        '"You are the source of my joy, the center of my world, and the whole of my heart." - Unknown',
+        '"I wish I could turn back the clock. I’d find you sooner and love you longer." - Unknown',
+        '"To the world you may be one person, but to one person you are the world." - Dr. Seuss'
+      ];
+
+      let currentQuoteIndex = 0;
+      const quoteElement = document.getElementById('currentQuote');
+
+      function showNextQuote() {
+        // Fade out the current quote
+        quoteElement.style.opacity = 0;
+
+        setTimeout(() => {
+          // Update the quote index
+          currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+          // Update the quote text
+          quoteElement.textContent = quotes[currentQuoteIndex];
+          // Fade in the new quote
+          quoteElement.style.opacity = 1;
+        }, 1000); // Duration matches the CSS transition
+      }
+
+      // Initialize the first quote opacity
+      quoteElement.style.opacity = 1;
+
+      // Change quote every 5 seconds
+      setInterval(showNextQuote, 5000);
+
+      // Confetti Animation
+      function createConfetti() {
+        const confettiContainer = document.getElementById('confettiContainer');
+        const numberOfConfetti = 100;
+
+        for (let i = 0; i < numberOfConfetti; i++) {
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          confetti.style.left = `${Math.random() * 100}%`;
+          confetti.style.backgroundColor = getRandomColor();
+          confettiContainer.appendChild(confetti);
+
+          // Remove confetti after animation ends
+          confetti.addEventListener('animationend', () => {
+            confetti.remove();
+          });
+        }
+      }
+
+      function getRandomColor() {
+        const colors = ['#f472b6', '#f59e0b', '#10b981', '#3b82f6', '#ec4899'];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      // Optional: Remove confetti container after some time
+      setInterval(() => {
+        const confettiContainer = document.getElementById('confettiContainer');
+        confettiContainer.innerHTML = '';
+      }, 5000);
+
+      // Initialize Swiper Carousel with slidesPerView:1
+      // (Already initialized above)
+
       // Music Control Button Functionality
       const backgroundMusic = document.getElementById('backgroundMusic');
       const playPauseButton = document.getElementById('playPauseButton');
@@ -879,6 +1145,27 @@
           playPauseButton.textContent = 'Play Music';
         }
       });
+
+      // Fade-In Animation on Scroll
+      const fadeInSections = document.querySelectorAll('.fade-in-section');
+
+      const observerOptions = {
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      fadeInSections.forEach(section => {
+        observer.observe(section);
+      });
+
     });
   </script>
 
