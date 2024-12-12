@@ -15,6 +15,11 @@ body {
   position: relative;
 }
 
+/* Hidden Class */
+.hidden {
+  display: none;
+}
+
 /* Main Container */
 #main-container {
   position: relative;
@@ -188,6 +193,9 @@ footer {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
   border-radius: 5px;
+  font-weight: bold;
+  color: #fff;
+  transition: background-color 0.3s;
 }
 
 .interactive-message .hidden {
@@ -196,6 +204,8 @@ footer {
   padding: 10px;
   border-radius: 5px;
   margin-top: 5px;
+  color: #333;
+  font-size: 1rem;
 }
 
 /* Typewriter Effect */
@@ -227,6 +237,20 @@ footer {
 
 .surprise-button:hover {
   background-color: #ff4757;
+}
+
+/* Different Colors for Surprise Buttons */
+.surprise-buttons .surprise-button:nth-child(1) { background-color: #ff6b81; }
+.surprise-buttons .surprise-button:nth-child(2) { background-color: #1e90ff; }
+.surprise-buttons .surprise-button:nth-child(3) { background-color: #32cd32; }
+.surprise-buttons .surprise-button:nth-child(4) { background-color: #ffa500; }
+.surprise-buttons .surprise-button:nth-child(5) { background-color: #ff69b4; }
+.surprise-buttons .surprise-button:nth-child(6) { background-color: #9370db; }
+.surprise-buttons .surprise-button:nth-child(7) { background-color: #00ced1; }
+.surprise-buttons .surprise-button:nth-child(8) { background-color: #dc143c; }
+
+.surprise-buttons .surprise-button:hover {
+  opacity: 0.8;
 }
 
 /* Three.js 3D Container */
@@ -302,9 +326,7 @@ footer {
 }
 
 /* Modal Content Animations */
-.modal-content {
-  /* Already defined above */
-}
+/* Already defined above */
 
 /* Bounce Animation */
 @keyframes bounce {
