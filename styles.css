@@ -21,7 +21,7 @@ body {
 }
 
 /* Show Modal Class */
-.show .modal-content {
+.modal.show .modal-content {
   opacity: 1;
   transform: scale(1);
 }
