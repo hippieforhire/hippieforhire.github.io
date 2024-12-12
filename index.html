@@ -235,15 +235,11 @@
       color: white;
       border-radius: 5px;
       cursor: default;
-      animation: flip 0.6s, bounce 0.3s;
     }
 
-    .wordle-cell.animate-flip {
-      animation: flip 0.6s forwards;
-    }
-
-    .wordle-cell.animate-bounce {
-      animation: bounce 0.3s;
+    /* Only specific cells have animations */
+    .wordle-cell.animate-flip-bounce {
+      animation: flip 0.6s, bounce 0.6s;
     }
 
     @keyframes flip {
@@ -408,6 +404,13 @@
   <!-- Background Canvas for Hearts Animation -->
   <canvas id="heartCanvas"></canvas>
 
+  <!-- Music Control Button -->
+  <div class="fixed top-4 right-4 z-50">
+    <button id="playPauseButton" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition transform hover:scale-105 shadow">
+      Pause Music
+    </button>
+  </div>
+
   <!-- Fade Overlay Messages -->
   <div id="overlayMessage">
     <div class="fade-message">Skye, I love you!</div>
@@ -514,27 +517,27 @@
       <div class="modal-tiles mt-6">
         <!-- Happy -->
         <div class="wordle-row">
-          <div class="wordle-cell animate-flip animate-bounce">H</div>
-          <div class="wordle-cell animate-flip animate-bounce">A</div>
-          <div class="wordle-cell animate-flip animate-bounce">P</div>
-          <div class="wordle-cell animate-flip animate-bounce">P</div>
-          <div class="wordle-cell animate-flip animate-bounce">Y</div>
+          <div class="wordle-cell animate-flip-bounce">H</div>
+          <div class="wordle-cell">A</div>
+          <div class="wordle-cell">P</div>
+          <div class="wordle-cell">P</div>
+          <div class="wordle-cell">Y</div>
         </div>
         <!-- Bday! -->
         <div class="wordle-row">
-          <div class="wordle-cell animate-flip animate-bounce">B</div>
-          <div class="wordle-cell animate-flip animate-bounce">D</div>
-          <div class="wordle-cell animate-flip animate-bounce">A</div>
-          <div class="wordle-cell animate-flip animate-bounce">Y</div>
-          <div class="wordle-cell animate-flip animate-bounce">!</div>
+          <div class="wordle-cell">B</div>
+          <div class="wordle-cell animate-flip-bounce">D</div>
+          <div class="wordle-cell">A</div>
+          <div class="wordle-cell">Y</div>
+          <div class="wordle-cell">!</div>
         </div>
         <!-- Skye! -->
         <div class="wordle-row">
-          <div class="wordle-cell animate-flip animate-bounce">S</div>
-          <div class="wordle-cell animate-flip animate-bounce">K</div>
-          <div class="wordle-cell animate-flip animate-bounce">Y</div>
-          <div class="wordle-cell animate-flip animate-bounce">E</div>
-          <div class="wordle-cell animate-flip animate-bounce">!</div>
+          <div class="wordle-cell">S</div>
+          <div class="wordle-cell">K</div>
+          <div class="wordle-cell">Y</div>
+          <div class="wordle-cell">E</div>
+          <div class="wordle-cell animate-flip-bounce">!</div>
         </div>
       </div>
       
@@ -549,13 +552,6 @@
         Got It!
       </button>
     </div>
-  </div>
-
-  <!-- Music Control Button -->
-  <div class="mt-4">
-    <button id="playPauseButton" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition transform hover:scale-105 shadow">
-      Pause Music
-    </button>
   </div>
 
   <!-- Background Music -->
