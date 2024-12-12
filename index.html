@@ -4,225 +4,396 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Happy Birthday Skye!</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Three.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- Typed.js Library for Typewriter Effect -->
+  <!-- Typed.js for Typewriter Effect -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <!-- Swiper.js for Photo Carousel -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <!-- Lightbox2 for Image Lightbox -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-  <!-- **Added Tailwind CSS CDN** -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #ffe6e6; /* Light pink background */
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Canvas */
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Fade In/Out Messages */
+    .fade-message {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      color: #ff4d4d;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInOut 8s infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0; }
+      10%, 90% { opacity: 1; }
+    }
+
+    .fade-message.second {
+      animation-delay: 4s;
+      color: #ff6666;
+    }
+
+    /* Typewriter Effect */
+    #typewriter {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.5rem;
+      color: #333;
+      text-align: center;
+      margin-top: 20px;
+      min-height: 50px;
+    }
+
+    /* Interactive Messages */
+    .interactive-message {
+      background-color: #fff0f0;
+      border: 2px solid #ffcccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px auto;
+      max-width: 600px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .interactive-message:hover {
+      transform: scale(1.05);
+      background-color: #ffe6e6;
+    }
+
+    .hidden-text {
+      display: none;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    .interactive-message.active .hidden-text {
+      display: block;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Surprise Buttons */
+    .surprise-button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .surprise-button:hover {
+      background-color: #ff1a1a;
+      transform: scale(1.05);
+    }
+
+    /* Modal Styles */
+    .modal {
+      transition: opacity 0.5s ease;
+      z-index: 50;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 700px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: slideDown 0.5s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #ff4d4d;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #ff4d4d;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: #cc0000;
+    }
+
+    /* Fade Overlay Message */
+    #overlayMessage {
+      position: fixed;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      z-index: 100;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .fade-message {
+        font-size: 2rem;
+      }
+
+      #typewriter {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
-<body>
-  <!-- Hearts Animation Canvas -->
-  <canvas id="heartsCanvas"></canvas>
+<body class="flex flex-col items-center justify-start min-h-screen relative">
+
+  <!-- Background Canvas for Hearts Animation -->
+  <canvas id="heartCanvas"></canvas>
+
+  <!-- Fade Overlay Messages -->
+  <div id="overlayMessage">
+    <div class="fade-message">Skye, I love you!</div>
+    <div class="fade-message second">Happy 33rd Birthday! -Zach-</div>
+  </div>
+
+  <!-- Typewriter Effect -->
+  <div id="typewriter"></div>
+
+  <!-- Interactive Messages -->
+  <div class="interactive-message">
+    <p><strong>Our first date.</strong></p>
+    <div class="hidden-text">Epic Movie was so bad.</div>
+  </div>
+  <div class="interactive-message">
+    <p><strong>Your psychic abilities.</strong></p>
+    <div class="hidden-text">I’ll never get to be telepathic 😢</div>
+  </div>
+  <div class="interactive-message">
+    <p><strong>You’re the best partner I could ask for</strong></p>
+    <div class="hidden-text">Love you to the 🌙 and to 🪐</div>
+  </div>
+  <div class="interactive-message">
+    <p><strong>Raising the coolest kid in the world</strong></p>
+    <div class="hidden-text">Who else jams to both Taylor Swift and Ice Nine Kills?</div>
+  </div>
+  <div class="interactive-message">
+    <p><strong>We are the best at planning pranks.</strong></p>
+    <div class="hidden-text">April Fools Day will forever be ours</div>
+  </div>
+  <div class="interactive-message">
+    <p><strong>Destroying Christmas Trees</strong></p>
+    <div class="hidden-text">Not sure why you hate them so much</div>
+  </div>
+  <div class="interactive-message">
+    <p><strong>Destroying lawnmowers</strong></p>
+    <div class="hidden-text">Don’t know why you hate these either 🤔</div>
+  </div>
+  <div class="interactive-message">
+    <p><strong>Lazy Sunday’s (and Tuesdays)</strong></p>
+    <div class="hidden-text">Every moment with is Home.</div>
+  </div>
+
+  <!-- Surprise Buttons -->
+  <div class="flex flex-wrap justify-center mt-6">
+    <button class="surprise-button" onclick="showSurprise('surprise1')">Surprise 1</button>
+    <button class="surprise-button" onclick="showSurprise('surprise2')">Surprise 2</button>
+    <button class="surprise-button" onclick="showSurprise('surprise3')">Surprise 3</button>
+    <button class="surprise-button" onclick="showSurprise('surprise4')">Surprise 4</button>
+    <button class="surprise-button" onclick="showSurprise('surprise5')">Surprise 5</button>
+    <button class="surprise-button" onclick="showSurprise('surprise6')">Surprise 6</button>
+    <button class="surprise-button" onclick="showSurprise('surprise7')">Surprise 7</button>
+    <button class="surprise-button" onclick="showSurprise('surprise8')">Surprise 8</button>
+  </div>
+
+  <!-- Surprise Messages -->
+  <div id="surpriseMessages" class="mt-6 max-w-2xl">
+    <div id="surprise1" class="hidden text-center text-lg text-red-600">I love you more than anything in the world. You mean so much to me Skye, and I will always try my hardest to be the best man I can for you and Addy.</div>
+    <div id="surprise2" class="hidden text-center text-lg text-red-600">I can’t believe I get to share this life with you, and I always look forward to whatever the next adventure will bring.</div>
+    <div id="surprise3" class="hidden text-center text-lg text-red-600">You are so funny, beautiful and wonderful.</div>
+    <div id="surprise4" class="hidden text-center text-lg text-red-600">I love your blue eyes.</div>
+    <div id="surprise5" class="hidden text-center text-lg text-red-600">I love your smile.</div>
+    <div id="surprise6" class="hidden text-center text-lg text-red-600">I love your Sim house building skills.</div>
+    <div id="surprise7" class="hidden text-center text-lg text-red-600">I love your city planning abilities in Cities Skylines.</div>
+    <div id="surprise8" class="hidden text-center text-lg text-red-600">You may not be the best at carrying a Domino’s pizza out of the car, but that’s okay with me ❤️</div>
+    <div id="surprise9" class="hidden text-center text-lg text-red-600">You have a pretty cute butt too.</div>
+  </div>
+
+  <!-- Modal for Additional Message (Optional) -->
+  <div id="additionalModal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="modal-content relative">
+      <span class="modal-close">&times;</span>
+      <h2 class="modal-header">A Special Message</h2>
+      <p class="text-center">To forever and ever, I love you so much. I hope you have a wonderful birthday.</p>
+      <button id="closeAdditionalModal" class="mt-6 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition transform hover:scale-105 shadow">
+        Got It!
+      </button>
+    </div>
+  </div>
 
   <!-- Background Music -->
-  <audio id="backgroundMusic" src="Growold.mp3" loop></audio>
-  <!-- Play Music Button -->
-  <button id="playMusicButton" class="play-music-button">Play Music</button>
+  <audio id="backgroundMusic" src="Growold.mp3" autoplay loop></audio>
 
-  <!-- Main Content -->
-  <div id="main-container">
-    <!-- Animated Welcome Messages -->
-    <div class="message" id="message1">Skye, I love you!</div>
-    <div class="message" id="message2">Happy 33rd Birthday! -Zach-</div>
+  <!-- JavaScript for Interactivity and Animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Typewriter Effect
+      new Typed('#typewriter', {
+        strings: ["To forever and ever, I love you so much. I hope you have a wonderful birthday."],
+        typeSpeed: 50,
+        backSpeed: 50,
+        loop: false
+      });
 
-    <!-- Navigation Menu -->
-    <nav id="navbar">
-      <ul>
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#gallery" class="nav-link">Gallery</a></li>
-        <li><a href="#about" class="nav-link">About Us</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-    </nav>
+      // Interactive Messages Toggle
+      const interactiveMessages = document.querySelectorAll('.interactive-message');
+      interactiveMessages.forEach(message => {
+        message.addEventListener('click', () => {
+          message.classList.toggle('active');
+        });
+      });
 
-    <!-- Home Section -->
-    <section id="home" class="section active-section">
-      <h1>Happy Birthday Skye, I love you!</h1>
-      <p>Celebrating the most amazing person in my life.</p>
+      // Surprise Buttons Function
+      window.showSurprise = function(id) {
+        const surprise = document.getElementById(id);
+        if (surprise) {
+          surprise.classList.toggle('hidden');
+        }
+      };
 
-      <!-- Interactive Messages -->
-      <div class="interactive-messages">
-        <div class="interactive-message">
-          <div class="visible">Our first date.</div>
-          <div class="hidden">Epic Movie was so bad.</div>
-        </div>
-        <div class="interactive-message">
-          <div class="visible">Your psychic abilities.</div>
-          <div class="hidden">I’ll never get to be telepathic 😢</div>
-        </div>
-        <div class="interactive-message">
-          <div class="visible">You’re the best partner I could ask for</div>
-          <div class="hidden">Love you to the 🌙 and to 🪐</div>
-        </div>
-        <div class="interactive-message">
-          <div class="visible">Raising the coolest kid in the world</div>
-          <div class="hidden">Who else jams to both Taylor Swift and Ice Nine Kills?</div>
-        </div>
-        <div class="interactive-message">
-          <div class="visible">We are the best at planning pranks.</div>
-          <div class="hidden">April Fools Day will forever be ours</div>
-        </div>
-        <div class="interactive-message">
-          <div class="visible">Destroying Christmas Trees</div>
-          <div class="hidden">Not sure why you hate them so much</div>
-        </div>
-        <div class="interactive-message">
-          <div class="visible">Destroying lawnmowers</div>
-          <div class="hidden">Don’t know why you hate these either 🤔</div>
-        </div>
-        <div class="interactive-message">
-          <div class="visible">Lazy Sunday’s (and Tuesdays)</div>
-          <div class="hidden">Every moment with you is Home.</div>
-        </div>
-      </div>
+      // Modal Functionality (Optional)
+      const additionalModal = document.getElementById('additionalModal');
+      const closeAdditionalModal = document.getElementById('closeAdditionalModal');
+      const modalClose = document.querySelector('.modal-close');
 
-      <!-- Typewriter Effect -->
-      <div id="typewriter" class="typewriter-effect"></div>
+      // Automatically open the additional modal after a delay
+      setTimeout(() => {
+        additionalModal.classList.remove('hidden');
+        additionalModal.classList.add('active');
+      }, 10000); // 10 seconds delay
 
-      <!-- Surprise Buttons -->
-      <div class="surprise-buttons">
-        <button class="surprise-button" data-message="I love you more than anything in the world. You mean so much to me Skye, and I will always try my hardest to be the best man I can for you and Addy.">Push here</button>
-        <button class="surprise-button" data-message="I can’t believe I get to share this life with you, and I always look forward to whatever the next adventure will bring.">Push here</button>
-        <button class="surprise-button" data-message="You are so funny, beautiful and wonderful.">Push here</button>
-        <button class="surprise-button" data-message="I love your blue eyes.">Push here</button>
-        <button class="surprise-button" data-message="I love your smile.">Push here</button>
-        <button class="surprise-button" data-message="I love your Sim house building skills.">Push here</button>
-        <button class="surprise-button" data-message="I love your city planning abilities in Cities Skylines.">Push here</button>
-        <button class="surprise-button" data-message="You may not be the best at carrying a Domino’s pizza out of the car, but that’s okay with me ❤️">Push here</button>
-      </div>
+      // Close modal on button click
+      closeAdditionalModal.addEventListener('click', () => {
+        additionalModal.classList.remove('active');
+        additionalModal.classList.add('hidden');
+      });
 
-      <!-- 3D Text and Heart -->
-      <div id="threeDContainer"></div>
+      modalClose.addEventListener('click', () => {
+        additionalModal.classList.remove('active');
+        additionalModal.classList.add('hidden');
+      });
 
-      <!-- Countdown Timers -->
-      <div class="countdown-timers">
-        <div class="countdown">
-          <h3>Anniversary Countdown</h3>
-          <div id="countdown1"></div>
-        </div>
-        <div class="countdown">
-          <h3>When We Were Young Fest</h3>
-          <div id="countdown2"></div>
-        </div>
-      </div>
+      // Initialize Heart Canvas Animation
+      const canvas = document.getElementById('heartCanvas');
+      const ctx = canvas.getContext('2d');
+      let hearts = [];
 
-      <!-- Relationship Milestones Chart -->
-      <div class="chart-container">
-        <canvas id="milestonesChart"></canvas>
-      </div>
-    </section>
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="section">
-      <h2>Our Memories</h2>
-      <!-- Photo Carousel -->
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="https://via.placeholder.com/800x600.png?text=Photo+1" data-lightbox="gallery" data-title="Memory 1">
-              <img src="https://via.placeholder.com/300x200.png?text=Photo+1" alt="Memory 1">
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="https://via.placeholder.com/800x600.png?text=Photo+2" data-lightbox="gallery" data-title="Memory 2">
-              <img src="https://via.placeholder.com/300x200.png?text=Photo+2" alt="Memory 2">
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="https://via.placeholder.com/800x600.png?text=Photo+3" data-lightbox="gallery" data-title="Memory 3">
-              <img src="https://via.placeholder.com/300x200.png?text=Photo+3" alt="Memory 3">
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="https://via.placeholder.com/800x600.png?text=Photo+4" data-lightbox="gallery" data-title="Memory 4">
-              <img src="https://via.placeholder.com/300x200.png?text=Photo+4" alt="Memory 4">
-            </a>
-          </div>
-        </div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-      </div>
-    </section>
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
 
-    <!-- About Us Section -->
-    <section id="about" class="section">
-      <h2>Our Story</h2>
-      <p>
-        From the moment we met, I knew you were the one. Your smile lights up my world, and every day with you is a new adventure. Here's to many more beautiful moments together.
-      </p>
-    </section>
+      // Heart Class
+      class Heart {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 20;
+          this.size = Math.random() * 20 + 10;
+          this.speed = Math.random() * 2 + 1;
+          this.opacity = Math.random() * 0.5 + 0.5;
+          this.drift = Math.random() * 1 - 0.5;
+        }
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-      <h2>A Special Message</h2>
-      <p>
-        I wanted to create this website to show you just how much you mean to me. Happy Birthday, my love!
-      </p>
-    </section>
-  </div>
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.fillStyle = '#ff4d4d';
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.bezierCurveTo(this.x - this.size / 2, this.y - this.size / 2, this.x - this.size, this.y + this.size / 3, this.x, this.y + this.size);
+          ctx.bezierCurveTo(this.x + this.size, this.y + this.size / 3, this.x + this.size / 2, this.y - this.size / 2, this.x, this.y);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 Zach &amp; Skye</p>
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-heart"></i></a>
-      <a href="#"><i class="fab fa-camera"></i></a>
-      <a href="#"><i class="fas fa-envelope"></i></a>
-    </div>
-  </footer>
+        update() {
+          this.y -= this.speed;
+          this.x += this.drift;
+          this.draw();
+        }
+      }
 
-  <!-- **Integrated Rules Modal from zach.works** -->
-  <div id="rulesModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-60">
-    <div class="modal-content bg-white rounded-lg shadow-lg p-6 relative">
-      <span class="modal-close cursor-pointer absolute top-4 right-4 text-2xl">&times;</span>
-      <h2 class="text-3xl font-bold text-center mb-4">Happy 33rd Birthday Skye!</h2>
-      <p class="text-lg text-gray-600 text-center">
-        I love you so much and I hope you have a great day and weekend. Another year of us turning older together, and I wouldn't change a thing. I can't wait to see where the next chapter takes us!
-      </p>
-      <!-- Example Tiles -->
-      <div class="mb-6">
-        <div class="flex space-x-2 justify-center mb-2">
-          <div class="wordle-cell">Happy</div>
-          <div class="wordle-cell">Bday!</div>
-          <div class="wordle-cell">Zach❤️</div>
-        </div>
-        <p class="text-center">You deserve all the happiness in the world.</p>
-      </div>
-      <div class="mb-6">
-        <p class="text-center">I hope #33 is the best one yet!</p>
-      </div>
-      <div class="mb-6">
-        <p class="text-center">You are such an amazing person.</p>
-      </div>
-      <div class="text-center">
-        <button id="closeRulesButton" class="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">Got It!</button>
-      </div>
-    </div>
-  </div>
+      // Generate Hearts
+      function generateHearts() {
+        if (hearts.length < 100) {
+          hearts.push(new Heart());
+        }
+      }
 
-  <!-- Fireworks Canvas -->
-  <canvas id="fireworksCanvas"></canvas>
+      // Animate Hearts
+      function animateHearts() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hearts.forEach((heart, index) => {
+          heart.update();
+          if (heart.y + heart.size < 0) {
+            hearts.splice(index, 1);
+          }
+        });
+        requestAnimationFrame(animateHearts);
+      }
 
-  <!-- Include Swiper JS -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <!-- Include Lightbox2 JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-  <!-- Include Chart.js for Data Visualization -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      generateHearts();
+      animateHearts();
+      setInterval(generateHearts, 500); // Add new hearts every 0.5 seconds
+    });
+  </script>
 
-  <script src="script.js"></script>
 </body>
 </html>
