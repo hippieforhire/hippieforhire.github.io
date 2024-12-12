@@ -168,6 +168,48 @@
       color: #cc0000;
     }
 
+    /* Modal Tiles */
+    .modal-tiles {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .modal-tile {
+      width: 100px;
+      height: 100px;
+      background-color: #ffe6e6;
+      border: 2px solid #ffcccc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2rem;
+      color: #ff4d4d;
+      cursor: default;
+      position: relative;
+      transition: transform 0.3s;
+    }
+
+    .modal-tile:hover {
+      transform: scale(1.1);
+    }
+
+    /* Modal Explanations */
+    .modal-explanations {
+      margin-top: 20px;
+    }
+
+    .modal-explanation {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: #555;
+    }
+
     /* Fade Overlay Message */
     #overlayMessage {
       position: fixed;
@@ -185,6 +227,17 @@
 
       #typewriter {
         font-size: 1.2rem;
+      }
+
+      .modal-tiles {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .modal-tile {
+        width: 80px;
+        height: 80px;
+        font-size: 1rem;
       }
     }
   </style>
@@ -262,13 +315,28 @@
     <div id="surprise9" class="hidden text-center text-lg text-red-600">You have a pretty cute butt too.</div>
   </div>
 
-  <!-- Modal for Additional Message (Optional) -->
-  <div id="additionalModal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+  <!-- Modal for Birthday Message -->
+  <div id="birthdayModal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
     <div class="modal-content relative">
       <span class="modal-close">&times;</span>
-      <h2 class="modal-header">A Special Message</h2>
-      <p class="text-center">To forever and ever, I love you so much. I hope you have a wonderful birthday.</p>
-      <button id="closeAdditionalModal" class="mt-6 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition transform hover:scale-105 shadow">
+      <h2 class="modal-header">Happy 33rd Birthday Skye!</h2>
+      <p class="text-center">I love you so much and I hope you have a great day and weekend. Another year of us turning older together, and I wouldn't change a thing. I can't wait to see where the next chapter takes us!</p>
+      
+      <!-- Modal Tiles -->
+      <div class="modal-tiles mt-6">
+        <div class="modal-tile">Happy</div>
+        <div class="modal-tile">Bday!</div>
+        <div class="modal-tile">Zach❤️</div>
+      </div>
+      
+      <!-- Modal Explanations -->
+      <div class="modal-explanations">
+        <div class="modal-explanation">You deserve all the happiness in the world.</div>
+        <div class="modal-explanation">I hope #33 is the best one yet!</div>
+        <div class="modal-explanation">You are such an amazing person.</div>
+      </div>
+      
+      <button id="closeBirthdayModal" class="mt-6 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition transform hover:scale-105 shadow">
         Got It!
       </button>
     </div>
@@ -280,6 +348,25 @@
   <!-- JavaScript for Interactivity and Animations -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Open the birthday modal immediately on page load
+      const birthdayModal = document.getElementById('birthdayModal');
+      birthdayModal.classList.remove('hidden');
+      birthdayModal.classList.add('active');
+
+      // Modal Close Elements
+      const closeBirthdayModal = document.getElementById('closeBirthdayModal');
+      const modalClose = document.querySelector('.modal-close');
+
+      // Function to close the modal
+      function closeModal() {
+        birthdayModal.classList.remove('active');
+        birthdayModal.classList.add('hidden');
+      }
+
+      // Event listeners for closing the modal
+      closeBirthdayModal.addEventListener('click', closeModal);
+      modalClose.addEventListener('click', closeModal);
+
       // Typewriter Effect
       new Typed('#typewriter', {
         strings: ["To forever and ever, I love you so much. I hope you have a wonderful birthday."],
@@ -303,28 +390,6 @@
           surprise.classList.toggle('hidden');
         }
       };
-
-      // Modal Functionality (Optional)
-      const additionalModal = document.getElementById('additionalModal');
-      const closeAdditionalModal = document.getElementById('closeAdditionalModal');
-      const modalClose = document.querySelector('.modal-close');
-
-      // Automatically open the additional modal after a delay
-      setTimeout(() => {
-        additionalModal.classList.remove('hidden');
-        additionalModal.classList.add('active');
-      }, 10000); // 10 seconds delay
-
-      // Close modal on button click
-      closeAdditionalModal.addEventListener('click', () => {
-        additionalModal.classList.remove('active');
-        additionalModal.classList.add('hidden');
-      });
-
-      modalClose.addEventListener('click', () => {
-        additionalModal.classList.remove('active');
-        additionalModal.classList.add('hidden');
-      });
 
       // Initialize Heart Canvas Animation
       const canvas = document.getElementById('heartCanvas');
