@@ -160,7 +160,7 @@
       font-size: 1.8rem;
       margin-bottom: 20px;
       text-align: center;
-      color: #ff4d4d;
+      color: #10b981; /* Tailwind green-500 */
       font-family: 'Pacifico', cursive;
     }
 
@@ -170,12 +170,12 @@
       right: 20px;
       font-size: 1.5rem;
       cursor: pointer;
-      color: #ff4d4d;
+      color: #10b981;
       transition: color 0.3s;
     }
 
     .modal-close:hover {
-      color: #cc0000;
+      color: #059669; /* Darker green */
     }
 
     /* Modal Tiles */
@@ -196,7 +196,7 @@
     .wordle-cell {
       width: 60px;
       height: 60px;
-      border: 2px solid #d1d5db; /* Tailwind gray-300 */
+      border: 2px solid #10b981; /* Tailwind green-500 */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -204,7 +204,8 @@
       font-weight: bold;
       text-transform: uppercase;
       transition: background-color 0.3s, border-color 0.3s;
-      background-color: white;
+      background-color: #10b981; /* Green background */
+      color: white;
       border-radius: 5px;
       cursor: default;
       animation: flip 0.6s, bounce 0.3s;
@@ -414,14 +415,14 @@
 
   <!-- Surprise Buttons -->
   <div class="flex flex-wrap justify-center mt-6">
-    <button class="surprise-button" onclick="showSurprise('surprise1')">Surprise 1</button>
-    <button class="surprise-button" onclick="showSurprise('surprise2')">Surprise 2</button>
-    <button class="surprise-button" onclick="showSurprise('surprise3')">Surprise 3</button>
-    <button class="surprise-button" onclick="showSurprise('surprise4')">Surprise 4</button>
-    <button class="surprise-button" onclick="showSurprise('surprise5')">Surprise 5</button>
-    <button class="surprise-button" onclick="showSurprise('surprise6')">Surprise 6</button>
-    <button class="surprise-button" onclick="showSurprise('surprise7')">Surprise 7</button>
-    <button class="surprise-button" onclick="showSurprise('surprise8')">Surprise 8</button>
+    <button class="surprise-button" onclick="showSurprise('surprise1')">Push me</button>
+    <button class="surprise-button" onclick="showSurprise('surprise2')">Push me</button>
+    <button class="surprise-button" onclick="showSurprise('surprise3')">Push me</button>
+    <button class="surprise-button" onclick="showSurprise('surprise4')">Push me</button>
+    <button class="surprise-button" onclick="showSurprise('surprise5')">Push me</button>
+    <button class="surprise-button" onclick="showSurprise('surprise6')">Push me</button>
+    <button class="surprise-button" onclick="showSurprise('surprise7')">Push me</button>
+    <button class="surprise-button" onclick="showSurprise('surprise8')">Push me</button>
   </div>
 
   <!-- Surprise Messages -->
@@ -483,6 +484,13 @@
         Got It!
       </button>
     </div>
+  </div>
+
+  <!-- Music Control Button -->
+  <div class="mt-4">
+    <button id="playPauseButton" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition transform hover:scale-105 shadow">
+      Pause Music
+    </button>
   </div>
 
   <!-- Background Music -->
@@ -600,6 +608,20 @@
       generateHearts();
       animateHearts();
       setInterval(generateHearts, 500); // Add new hearts every 0.5 seconds
+
+      // Music Control Button Functionality
+      const backgroundMusic = document.getElementById('backgroundMusic');
+      const playPauseButton = document.getElementById('playPauseButton');
+
+      playPauseButton.addEventListener('click', () => {
+        if (backgroundMusic.paused) {
+          backgroundMusic.play();
+          playPauseButton.textContent = 'Pause Music';
+        } else {
+          backgroundMusic.pause();
+          playPauseButton.textContent = 'Play Music';
+        }
+      });
     });
   </script>
 
