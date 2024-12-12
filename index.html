@@ -361,6 +361,11 @@
       background-color: #d1d5db; /* Tailwind gray-300 */
     }
 
+    /* Hide Swiper Pagination Dots */
+    .swiper-pagination {
+      display: none;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .fade-message {
@@ -423,8 +428,8 @@
       <!-- Dynamically added slides below -->
       <!-- Slide 1 -->
       <div class="swiper-slide">
-        <a href="img/Pic1.jpg" data-lightbox="birthday-carousel">
-          <img src="img/Pic1.jpg" alt="Photo 1">
+        <a href="img/pic1.jpg" data-lightbox="birthday-carousel">
+          <img src="img/pic1.jpg" alt="Photo 1">
         </a>
       </div>
       <!-- Slide 2 -->
@@ -841,9 +846,11 @@
       animateHearts();
       setInterval(generateHearts, 500); // Add new hearts every 0.5 seconds
 
-      // Initialize Swiper Carousel
+      // Initialize Swiper Carousel with slidesPerView:1
       var swiper = new Swiper('.swiper-container', {
         loop: true,
+        slidesPerView: 1, // Ensures only one slide is visible
+        spaceBetween: 0,  // No space between slides
         autoplay: {
           delay: 3000,
           disableOnInteraction: false,
@@ -856,6 +863,7 @@
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
+        // Responsive breakpoints can be added if needed
       });
 
       // Music Control Button Functionality
