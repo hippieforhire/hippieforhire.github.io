@@ -4,14 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Happy Birthday Skye!</title>
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <!-- Typed.js for Typewriter Effect -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  
+  <!-- Swiper.js CSS for Carousel -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  
+  <!-- Lightbox2 CSS for Lightbox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+  
   <!-- Custom Styles -->
   <style>
     body {
@@ -36,7 +47,7 @@
     .fade-message {
       font-family: 'Pacifico', cursive;
       font-size: 2.5rem;
-      color: #ff4d4d;
+      color: #10b981; /* Updated to green for consistency */
       text-align: center;
       opacity: 0;
       animation: fadeInOut 8s infinite;
@@ -50,7 +61,7 @@
 
     .fade-message.second {
       animation-delay: 4s;
-      color: #ff6666;
+      color: #059669; /* Darker green */
     }
 
     /* Typewriter Effect */
@@ -61,6 +72,21 @@
       text-align: center;
       margin-top: 20px;
       min-height: 50px;
+    }
+
+    /* Photo Carousel */
+    .swiper-container {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      margin-top: 30px;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
     }
 
     /* Interactive Messages */
@@ -129,12 +155,13 @@
       z-index: 50;
     }
 
-    .hidden {
+    .hidden-surprise {
       opacity: 0;
       pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    .active {
+    .active-surprise {
       opacity: 1;
       pointer-events: auto;
     }
@@ -362,8 +389,19 @@
         height: 50px;
         font-size: 0.8rem;
       }
+
+      .swiper-container {
+        height: 250px;
+      }
     }
   </style>
+  
+  <!-- Swiper JS for Carousel -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  
+  <!-- Lightbox2 JS for Lightbox -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  
 </head>
 <body class="flex flex-col items-center justify-start min-h-screen relative">
 
@@ -374,6 +412,33 @@
   <div id="overlayMessage">
     <div class="fade-message">Skye, I love you!</div>
     <div class="fade-message second">Happy 33rd Birthday! -Zach-</div>
+  </div>
+
+  <!-- Slideshow Carousel -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <a href="images/photo1.jpg" data-lightbox="birthday-carousel">
+          <img src="images/photo1-thumbnail.jpg" alt="Photo 1">
+        </a>
+      </div>
+      <div class="swiper-slide">
+        <a href="images/photo2.jpg" data-lightbox="birthday-carousel">
+          <img src="images/photo2-thumbnail.jpg" alt="Photo 2">
+        </a>
+      </div>
+      <div class="swiper-slide">
+        <a href="images/photo3.jpg" data-lightbox="birthday-carousel">
+          <img src="images/photo3-thumbnail.jpg" alt="Photo 3">
+        </a>
+      </div>
+      <!-- Add more slides as needed -->
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Navigation -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
   </div>
 
   <!-- Typewriter Effect -->
@@ -427,15 +492,15 @@
 
   <!-- Surprise Messages -->
   <div id="surpriseMessages" class="mt-6 max-w-2xl">
-    <div id="surprise1" class="hidden text-center text-lg text-red-600">I love you more than anything in the world. You mean so much to me Skye, and I will always try my hardest to be the best man I can for you and Addy.</div>
-    <div id="surprise2" class="hidden text-center text-lg text-red-600">I can’t believe I get to share this life with you, and I always look forward to whatever the next adventure will bring.</div>
-    <div id="surprise3" class="hidden text-center text-lg text-red-600">You are so funny, beautiful and wonderful.</div>
-    <div id="surprise4" class="hidden text-center text-lg text-red-600">I love your blue eyes.</div>
-    <div id="surprise5" class="hidden text-center text-lg text-red-600">I love your smile.</div>
-    <div id="surprise6" class="hidden text-center text-lg text-red-600">I love your Sim house building skills.</div>
-    <div id="surprise7" class="hidden text-center text-lg text-red-600">I love your city planning abilities in Cities Skylines.</div>
-    <div id="surprise8" class="hidden text-center text-lg text-red-600">You may not be the best at carrying a Domino’s pizza out of the car, but that’s okay with me ❤️</div>
-    <div id="surprise9" class="hidden text-center text-lg text-red-600">You have a pretty cute butt too.</div>
+    <div id="surprise1" class="hidden-surprise text-center text-lg text-red-600">I love you more than anything in the world. You mean so much to me Skye, and I will always try my hardest to be the best man I can for you and Addy.</div>
+    <div id="surprise2" class="hidden-surprise text-center text-lg text-red-600">I can’t believe I get to share this life with you, and I always look forward to whatever the next adventure will bring.</div>
+    <div id="surprise3" class="hidden-surprise text-center text-lg text-red-600">You are so funny, beautiful and wonderful.</div>
+    <div id="surprise4" class="hidden-surprise text-center text-lg text-red-600">I love your blue eyes.</div>
+    <div id="surprise5" class="hidden-surprise text-center text-lg text-red-600">I love your smile.</div>
+    <div id="surprise6" class="hidden-surprise text-center text-lg text-red-600">I love your Sim house building skills.</div>
+    <div id="surprise7" class="hidden-surprise text-center text-lg text-red-600">I love your city planning abilities in Cities Skylines.</div>
+    <div id="surprise8" class="hidden-surprise text-center text-lg text-red-600">You may not be the best at carrying a Domino’s pizza out of the car, but that’s okay with me ❤️</div>
+    <!-- Removed surprise9 to match 8 buttons -->
   </div>
 
   <!-- Modal for Birthday Message -->
@@ -463,13 +528,13 @@
           <div class="wordle-cell animate-flip animate-bounce">Y</div>
           <div class="wordle-cell animate-flip animate-bounce">!</div>
         </div>
-        <!-- Zach❤️ -->
+        <!-- Skye! -->
         <div class="wordle-row">
-          <div class="wordle-cell animate-flip animate-bounce">Z</div>
-          <div class="wordle-cell animate-flip animate-bounce">A</div>
-          <div class="wordle-cell animate-flip animate-bounce">C</div>
-          <div class="wordle-cell animate-flip animate-bounce">H</div>
-          <div class="wordle-cell animate-flip animate-bounce">❤</div>
+          <div class="wordle-cell animate-flip animate-bounce">S</div>
+          <div class="wordle-cell animate-flip animate-bounce">K</div>
+          <div class="wordle-cell animate-flip animate-bounce">Y</div>
+          <div class="wordle-cell animate-flip animate-bounce">E</div>
+          <div class="wordle-cell animate-flip animate-bounce">!</div>
         </div>
       </div>
       
@@ -538,7 +603,7 @@
       window.showSurprise = function(id) {
         const surprise = document.getElementById(id);
         if (surprise) {
-          surprise.classList.toggle('hidden');
+          surprise.classList.toggle('hidden-surprise');
         }
       };
 
@@ -608,6 +673,23 @@
       generateHearts();
       animateHearts();
       setInterval(generateHearts, 500); // Add new hearts every 0.5 seconds
+
+      // Initialize Swiper Carousel
+      var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
 
       // Music Control Button Functionality
       const backgroundMusic = document.getElementById('backgroundMusic');
