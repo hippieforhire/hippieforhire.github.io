@@ -186,16 +186,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Pacifico', cursive;
-      font-size: 1.2rem;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1rem;
       color: #ff4d4d;
       cursor: default;
       position: relative;
       transition: transform 0.3s;
+      animation: flip 0.6s, bounce 0.3s;
     }
 
-    .modal-tile:hover {
-      transform: scale(1.1);
+    @keyframes flip {
+      0% { transform: rotateX(0deg); }
+      50% { transform: rotateX(90deg); }
+      100% { transform: rotateX(0deg); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
     }
 
     /* Modal Explanations */
@@ -210,13 +218,100 @@
       color: #555;
     }
 
-    /* Fade Overlay Message */
-    #overlayMessage {
+    /* Correct Guess Overlay */
+    #correctGuessMessage {
       position: fixed;
-      top: 20px;
-      width: 100%;
-      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(16, 185, 129, 0.9); /* Tailwind green-500 with opacity */
+      color: white;
+      padding: 20px 40px;
+      border-radius: 10px;
+      font-size: 2rem;
+      display: none;
       z-index: 100;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: fadeInOverlay 0.5s forwards;
+    }
+
+    @keyframes fadeInOverlay {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Round Indicator Styles */
+    #roundIndicator {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #1f2937; /* Tailwind gray-800 */
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Hidden Input Field */
+    #wordleInput {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Decorative Animated Element Above Header */
+    .decorative-animation {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at center, #a1c4fd, #c2e9fb);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    @keyframes float {
+      0% { transform: translate(-50%, -10px) rotate(0deg); }
+      50% { transform: translate(-50%, 10px) rotate(180deg); }
+      100% { transform: translate(-50%, -10px) rotate(360deg); }
+    }
+
+    /* Animated "Z" Logo */
+    .z-logo {
+      animation: spin 10s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Theme Text Styles */
+    .theme-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1f2937; /* Tailwind gray-800 */
+      margin-bottom: 10px;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .theme-letter {
+      display: inline-block;
+      margin: 0 2px;
+      padding: 5px;
+      border-radius: 3px;
+      transition: background-color 0.3s;
+    }
+
+    .theme-letter.selected {
+      background-color: #3b82f6; /* Tailwind blue-500 */
+      color: white;
+    }
+
+    .theme-letter:hover {
+      background-color: #d1d5db; /* Tailwind gray-300 */
     }
 
     /* Responsive Design */
@@ -237,7 +332,7 @@
       .modal-tile {
         width: 80px;
         height: 80px;
-        font-size: 1rem;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -316,17 +411,19 @@
   </div>
 
   <!-- Modal for Birthday Message -->
-  <div id="birthdayModal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+  <div id="birthdayModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
     <div class="modal-content relative">
       <span class="modal-close">&times;</span>
-      <h2 class="modal-header">Happy 33rd Birthday Skye!</h2>
+      <h2 class="modal-header mb-4">Happy 33rd Birthday Skye!</h2>
       <p class="text-center">I love you so much and I hope you have a great day and weekend. Another year of us turning older together, and I wouldn't change a thing. I can't wait to see where the next chapter takes us!</p>
       
       <!-- Modal Tiles -->
       <div class="modal-tiles mt-6">
-        <div class="modal-tile">Happy</div>
-        <div class="modal-tile">Bday!</div>
-        <div class="modal-tile">Zach❤️</div>
+        <div class="wordle-row">
+          <div class="wordle-cell animate-flip animate-bounce">Happy</div>
+          <div class="wordle-cell animate-flip animate-bounce">Bday!</div>
+          <div class="wordle-cell animate-flip animate-bounce">Zach❤️</div>
+        </div>
       </div>
       
       <!-- Modal Explanations -->
