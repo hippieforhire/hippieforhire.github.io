@@ -377,3 +377,12 @@ function closeBirthdayModal() {
   modal.classList.add("hidden");
   document.body.classList.remove("modal-open");
 }
+
+// Play Music Button Functionality
+const playMusicButton = document.getElementById('playMusicButton');
+const backgroundMusic = document.getElementById('backgroundMusic');
+
+playMusicButton.addEventListener('click', () => {
+  backgroundMusic.play();
+  playMusicButton.style.display = 'none';
+});
