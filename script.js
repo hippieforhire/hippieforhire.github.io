@@ -368,20 +368,14 @@ window.addEventListener('resize', () => {
 document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("birthdayModal");
   modal.classList.remove("hidden");
-  // Trigger CSS transitions
-  setTimeout(() => {
-    modal.classList.add("show");
-  }, 100); // Slight delay to allow for transition
+  document.body.classList.add("modal-open");
 });
 
 // Close Birthday Modal Function
 function closeBirthdayModal() {
   const modal = document.getElementById("birthdayModal");
-  modal.classList.remove("show");
-  // Hide the modal after the transition
-  setTimeout(() => {
-    modal.classList.add("hidden");
-  }, 300); // Match the transition duration in CSS
+  modal.classList.add("hidden");
+  document.body.classList.remove("modal-open");
 }
 
 // Play Music Button Functionality
