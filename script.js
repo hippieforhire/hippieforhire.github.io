@@ -364,23 +364,13 @@ window.addEventListener('resize', () => {
   fireworksCanvas.height = window.innerHeight;
 });
 
-// Initialize Birthday Modal on Load
+// Initialize Rules Modal on Load
 document.addEventListener("DOMContentLoaded", function () {
-  const birthdayModal = document.getElementById("birthdayModal");
   const rulesModal = document.getElementById("rulesModal");
-
-  // Open Birthday Modal
-  birthdayModal.classList.remove("hidden");
 
   // Open Rules Modal
   rulesModal.classList.remove("hidden");
 });
-
-// Close Birthday Modal Function
-function closeBirthdayModal() {
-  const modal = document.getElementById("birthdayModal");
-  modal.classList.add("hidden");
-}
 
 // Close Rules Modal Function
 function closeRulesModal() {
