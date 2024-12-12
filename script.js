@@ -368,12 +368,14 @@ window.addEventListener('resize', () => {
 document.addEventListener("DOMContentLoaded", function () {
   const rulesModal = document.getElementById("rulesModal");
   rulesModal.classList.remove("hidden");
+  rulesModal.classList.add("flex");
 });
 
 // Close Rules Modal Function
 function closeRulesModal() {
   const rulesModal = document.getElementById("rulesModal");
   rulesModal.classList.add("hidden");
+  rulesModal.classList.remove("flex");
 }
 
 // Event Listeners for Rules Modal
@@ -382,6 +384,14 @@ const modalClose = document.querySelector('.modal-close');
 
 closeRulesButton.addEventListener('click', closeRulesModal);
 modalClose.addEventListener('click', closeRulesModal);
+
+// Optional: Close modal when clicking outside the modal content
+const rulesModal = document.getElementById("rulesModal");
+rulesModal.addEventListener('click', function(e) {
+  if (e.target === rulesModal) {
+    closeRulesModal();
+  }
+});
 
 // Play Music Button Functionality
 const playMusicButton = document.getElementById('playMusicButton');
@@ -397,42 +407,3 @@ playMusicButton.addEventListener('click', () => {
       console.error('Error playing audio:', error);
     });
 });
-// Existing script.js content remains unchanged up to this point
-
-// **Added Modal Functionality**
-
-document.addEventListener("DOMContentLoaded", function () {
-  const rulesModal = document.getElementById("rulesModal");
-  const closeRulesButton = document.getElementById('closeRulesButton');
-  const modalClose = document.querySelector('.modal-close');
-
-  // Function to open rules modal
-  function openRulesModal() {
-    rulesModal.classList.remove("hidden");
-    rulesModal.classList.add("flex");
-  }
-
-  // Function to close rules modal
-  function closeRulesModal() {
-    rulesModal.classList.add("hidden");
-    rulesModal.classList.remove("flex");
-  }
-
-  // **Automatically open the rules modal on page load**
-  openRulesModal();
-
-  // Event Listeners for closing the modal
-  closeRulesButton.addEventListener('click', closeRulesModal);
-  modalClose.addEventListener('click', closeRulesModal);
-
-  // Optional: Close modal when clicking outside the modal content
-  rulesModal.addEventListener('click', function(e) {
-    if (e.target === rulesModal) {
-      closeRulesModal();
-    }
-  });
-});
-
-// **Ensure no duplicate modals are present**
-// Since we've integrated the modal from zach.works and removed the existing one,
-// there's no need for additional checks here.
