@@ -330,11 +330,11 @@ footer {
 
 /* Rules Explanation Modal */
 #rulesModal {
-  /* Already styled in index.html and script.js */
+  /* Already styled in index.html and handled in script.js */
 }
 
 .modal-content {
-  /* Common modal content styles */
+  /* Existing modal content styles */
 }
 
 .modal-close {
@@ -344,12 +344,12 @@ footer {
   top: 10px;
   right: 15px;
   font-size: 1.5rem;
-  color: #6b7280;
+  color: #6b7280; /* Tailwind gray-500 */
   transition: color 0.3s;
 }
 
 .modal-close:hover {
-  color: #374151;
+  color: #374151; /* Tailwind gray-700 */
 }
 
 /* Wordle Cell Styles */
@@ -364,12 +364,7 @@ footer {
   color: #333;
 }
 
-/* Animated Letters in Birthday Modal */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
+/* Animated Letters in Rules Modal */
 .animate-bounce {
   animation: bounce 1s infinite;
 }
