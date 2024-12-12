@@ -1,451 +1,388 @@
-/* Importing Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
+// Canvas for hearts animation
+const canvas = document.getElementById('heartsCanvas');
+const ctx = canvas.getContext('2d');
 
-/* Reset and Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
-  overflow-x: hidden;
-  position: relative;
-}
+let hearts = [];
+const maxHearts = 100; // Limit the number of hearts for performance
 
-/* Hidden Class */
-.hidden {
-  display: none;
-}
-
-/* Main Container */
-#main-container {
-  position: relative;
-  z-index: 10;
-}
-
-/* Navigation Menu */
-nav#navbar {
-  position: fixed;
-  top: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 20;
-}
-
-nav#navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-}
-
-nav#navbar ul li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
-  position: relative;
-  padding: 5px 0;
-}
-
-nav#navbar ul li a::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: white;
-  left: 0;
-  bottom: 0;
-  transition: width 0.3s;
-}
-
-nav#navbar ul li a:hover::after,
-nav#navbar ul li a.active::after {
-  width: 100%;
-}
-
-nav#navbar ul li a.active {
-  font-weight: bold;
-}
-
-/* Sections */
-.section {
-  min-height: 100vh;
-  padding: 100px 20px 50px 20px;
-  display: none;
-  text-align: center;
-  color: white;
-}
-
-.active-section {
-  display: block;
-}
-
-#home {
-  display: block;
-}
-
-.section h1,
-.section h2 {
-  font-family: 'Pacifico', cursive;
-  margin-bottom: 20px;
-  font-size: 3rem;
-  animation: fadeInDown 1s ease-out;
-}
-
-.section p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto 20px auto;
-  animation: fadeInUp 1s ease-out;
-}
-
-/* Gallery */
-.gallery-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.gallery-container img {
-  width: 300px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.gallery-container img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Swiper Carousel Styles */
-.swiper-container {
-  width: 80%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.swiper-slide img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  color: white;
-  background: rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 10;
-}
-
-.social-icons {
-  margin-top: 10px;
-}
-
-.social-icons a {
-  color: white;
-  margin: 0 10px;
-  font-size: 1.5rem;
-  transition: color 0.3s;
-}
-
-.social-icons a:hover {
-  color: #ff6b81;
-}
-
-/* Animated Messages */
-.message {
-  font-size: 3rem;
-  color: white;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  animation: fade-in-out 4s linear forwards;
-}
-
-#message2 {
-  animation-delay: 4s;
-}
-
-/* Interactive Messages */
-.interactive-messages {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.interactive-message {
-  position: relative;
-  width: 300px;
-  cursor: pointer;
-}
-
-.interactive-message .visible {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #fff;
-  transition: background-color 0.3s;
-}
-
-.interactive-message .hidden {
-  display: none;
-  background-color: rgba(255, 255, 255, 0.3);
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 5px;
-  color: #333;
-  font-size: 1rem;
-}
-
-/* Typewriter Effect */
-.typewriter-effect {
-  font-size: 1.5rem;
-  color: white;
-  margin-top: 20px;
-  min-height: 50px;
-}
-
-/* Surprise Buttons */
-.surprise-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.surprise-button {
-  padding: 10px 20px;
-  background-color: #ff6b81;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.surprise-button:hover {
-  background-color: #ff4757;
-}
-
-/* Different Colors for Surprise Buttons */
-.surprise-buttons .surprise-button:nth-child(1) { background-color: #ff6b81; }
-.surprise-buttons .surprise-button:nth-child(2) { background-color: #1e90ff; }
-.surprise-buttons .surprise-button:nth-child(3) { background-color: #32cd32; }
-.surprise-buttons .surprise-button:nth-child(4) { background-color: #ffa500; }
-.surprise-buttons .surprise-button:nth-child(5) { background-color: #ff69b4; }
-.surprise-buttons .surprise-button:nth-child(6) { background-color: #9370db; }
-.surprise-buttons .surprise-button:nth-child(7) { background-color: #00ced1; }
-.surprise-buttons .surprise-button:nth-child(8) { background-color: #dc143c; }
-
-.surprise-buttons .surprise-button:hover {
-  opacity: 0.8;
-}
-
-/* Three.js 3D Container */
-#threeDContainer {
-  width: 300px;
-  height: 150px;
-  margin: 20px auto;
-}
-
-/* Countdown Timers */
-.countdown-timers {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin: 30px 0;
-}
-
-.countdown {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.countdown h3 {
-  margin-bottom: 10px;
-}
-
-.countdown div {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-/* Chart Container */
-.chart-container {
-  width: 80%;
-  max-width: 600px;
-  margin: 30px auto;
-}
-
-/* Happy Birthday Modal */
-#birthdayModal .modal-content {
-  background: linear-gradient(135deg, #ffffff, #f0f0f0);
-  border-radius: 15px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform: scale(0.9);
-  opacity: 0;
-}
-
-.modal-open .modal-content {
-  transform: scale(1);
-  opacity: 1;
-}
-
-.interactive-explanations {
-  margin: 20px 0;
-}
-
-.interactive-explanations p {
-  margin: 10px 0;
-  font-size: 1.1rem;
-  color: #555;
-}
-
-/* Fireworks Canvas */
-#fireworksCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Modal Content Animations */
-/* Already defined above */
-
-/* Bounce Animation */
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-}
-.animate-bounce {
-  animation: bounce 1s infinite;
-}
-.animate-bounce-delay {
-  animation: bounce 1s infinite 0.2s;
-}
-
-/* Spin Animation */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.animate-spin {
-  animation: spin 2s linear infinite;
-}
-
-/* Pulse Animation */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-.animate-pulse {
-  animation: pulse 2s infinite;
-}
-
-/* Fade In/Out Animations */
-@keyframes fade-in-out {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  25% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.9);
+function createHeart() {
+  if (hearts.length < maxHearts) {
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: canvas.height + 20,
+      size: Math.random() * 10 + 10,
+      speed: Math.random() * 2 + 1,
+      opacity: Math.random(),
+      drift: Math.random() * 2 - 1
+    });
   }
 }
 
-/* Fade In Down */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
+function drawHearts() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hearts.forEach((heart, i) => {
+    ctx.fillStyle = `rgba(255, 0, 150, ${heart.opacity})`;
+    ctx.beginPath();
+    ctx.moveTo(heart.x, heart.y);
+    ctx.bezierCurveTo(
+      heart.x + heart.size / 2,
+      heart.y - heart.size / 2,
+      heart.x + heart.size,
+      heart.y + heart.size / 2,
+      heart.x,
+      heart.y + heart.size
+    );
+    ctx.bezierCurveTo(
+      heart.x - heart.size,
+      heart.y + heart.size / 2,
+      heart.x - heart.size / 2,
+      heart.y - heart.size / 2,
+      heart.x,
+      heart.y
+    );
+    ctx.closePath();
+    ctx.fill();
+
+    // Update heart position
+    heart.y -= heart.speed;
+    heart.x += heart.drift;
+    heart.opacity -= 0.005;
+
+    // Remove hearts that are no longer visible
+    if (heart.opacity <= 0) hearts.splice(i, 1);
+  });
+}
+
+function animateHearts() {
+  drawHearts();
+  if (Math.random() < 0.05) createHeart();
+  requestAnimationFrame(animateHearts);
+}
+
+animateHearts();
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// Navigation Smooth Scrolling
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Remove active class from all links
+    navLinks.forEach(nav => nav.classList.remove('active'));
+    // Add active class to the clicked link
+    this.classList.add('active');
+
+    const targetId = this.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetId);
+
+    // Scroll to the target section
+    window.scrollTo({
+      top: targetSection.offsetTop - 80,
+      behavior: 'smooth'
+    });
+
+    // Hide mobile menu if open
+    if (window.innerWidth <= 768) {
+      document.querySelector('nav#navbar ul').classList.remove('show');
+    }
+  });
+});
+
+// Highlight Active Section on Scroll
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href').substring(1) === current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// Responsive Navigation Toggle (Optional)
+const navbar = document.getElementById('navbar');
+const navUl = navbar.querySelector('ul');
+
+const toggleNav = () => {
+  navUl.classList.toggle('show');
+};
+
+navbar.addEventListener('click', (e) => {
+  if (e.target.tagName === 'NAV' || e.target.tagName === 'UL') {
+    toggleNav();
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+});
+
+// Interactive Messages Toggle
+const interactiveMessages = document.querySelectorAll('.interactive-message');
+
+interactiveMessages.forEach(message => {
+  // Use click instead of hover for better mobile compatibility
+  message.addEventListener('click', () => {
+    const hidden = message.querySelector('.hidden');
+    if (hidden.style.display === 'block') {
+      hidden.style.display = 'none';
+    } else {
+      hidden.style.display = 'block';
+    }
+  });
+});
+
+// Typewriter Effect
+const typed = new Typed('#typewriter', {
+  strings: ["To forever and ever, I love you so much. I hope you have a wonderful birthday."],
+  typeSpeed: 50,
+  backSpeed: 25,
+  backDelay: 5000,
+  startDelay: 1000,
+  loop: false
+});
+
+// Surprise Buttons Functionality
+const surpriseButtons = document.querySelectorAll('.surprise-button');
+
+surpriseButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const message = button.getAttribute('data-message');
+    alert(message);
+  });
+});
+
+// Initialize Three.js Scene
+const threeDContainer = document.getElementById('threeDContainer');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, threeDContainer.clientWidth / threeDContainer.clientHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(threeDContainer.clientWidth, threeDContainer.clientHeight);
+threeDContainer.appendChild(renderer.domElement);
+
+// Add 3D Text
+const loader = new THREE.FontLoader();
+loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
+  const geometry = new THREE.TextGeometry('I love you Skye!', {
+    font: font,
+    size: 0.5,
+    height: 0.1,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.02,
+    bevelSize: 0.04,
+    bevelOffset: 0,
+    bevelSegments: 5
+  });
+  const material = new THREE.MeshBasicMaterial({ color: 0xff69b4 });
+  const text = new THREE.Mesh(geometry, material);
+  geometry.center();
+  scene.add(text);
+
+  // Add Heart
+  const heartShape = new THREE.Shape();
+
+  heartShape.moveTo(0, 0);
+  heartShape.bezierCurveTo(0, 0.5, 1, 1.5, 2, 0);
+  heartShape.bezierCurveTo(2, -1, 1, -1.5, 0, -1);
+  heartShape.bezierCurveTo(-1, -1.5, -2, -1, -2, 0);
+  heartShape.bezierCurveTo(-2, 1, -1, 1.5, 0, 1);
+
+  const heartGeometry = new THREE.ShapeGeometry(heartShape);
+  const heartMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+  const heart = new THREE.Mesh(heartGeometry, heartMaterial);
+  heart.scale.set(0.5, 0.5, 0.5);
+  heart.position.set(-1.5, -1, 0);
+  scene.add(heart);
+
+  camera.position.z = 5;
+
+  const animate = function () {
+    requestAnimationFrame(animate);
+    text.rotation.y += 0.01;
+    heart.rotation.z += 0.02;
+    renderer.render(scene, camera);
+  };
+
+  animate();
+});
+
+// Initialize Swiper Carousel
+const swiper = new Swiper('.swiper-container', {
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+// Initialize Lightbox
+lightbox.option({
+  'resizeDuration': 200,
+  'wrapAround': true
+});
+
+// Countdown Timers
+function updateCountdown(id, targetDate) {
+  const countdownElement = document.getElementById(id);
+  const countDownDate = new Date(targetDate).getTime();
+
+  const interval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    if (distance < 0) {
+      clearInterval(interval);
+      countdownElement.innerHTML = "Event Started!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
+}
+
+updateCountdown('countdown1', 'April 1, 2025 00:00:00');
+updateCountdown('countdown2', 'October 18, 2024 00:00:00');
+
+// Chart.js for Relationship Milestones
+const ctxChart = document.getElementById('milestonesChart').getContext('2d');
+const milestonesChart = new Chart(ctxChart, {
+  type: 'bar',
+  data: {
+    labels: ['Adventures Together', 'Memories Captured', 'Pranks Planned', 'Laughs Shared'],
+    datasets: [{
+      label: 'Our Journey',
+      data: [15, 30, 10, 50], // Example data
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+// Initialize Fireworks Animation
+const fireworksCanvas = document.getElementById('fireworksCanvas');
+const fwCtx = fireworksCanvas.getContext('2d');
+
+fireworksCanvas.width = window.innerWidth;
+fireworksCanvas.height = window.innerHeight;
+
+let particles = [];
+const maxParticles = 300;
+
+function createFirework(x, y) {
+  const particleCount = 100;
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: x,
+      y: y,
+      speed: Math.random() * 5 + 2,
+      angle: Math.random() * Math.PI * 2,
+      size: Math.random() * 2 + 1,
+      color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+      opacity: 1,
+      decay: Math.random() * 0.015 + 0.003
+    });
   }
 }
 
-/* Fade In Up */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
+function drawFireworks() {
+  fwCtx.globalCompositeOperation = 'source-over';
+  fwCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  fwCtx.fillRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+  fwCtx.globalCompositeOperation = 'lighter';
+
+  particles.forEach((particle, index) => {
+    fwCtx.beginPath();
+    fwCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+    fwCtx.fillStyle = particle.color;
+    fwCtx.globalAlpha = particle.opacity;
+    fwCtx.fill();
+
+    particle.x += Math.cos(particle.angle) * particle.speed;
+    particle.y += Math.sin(particle.angle) * particle.speed;
+    particle.opacity -= particle.decay;
+
+    if (particle.opacity <= 0) {
+      particles.splice(index, 1);
+    }
+  });
+
+  if (Math.random() < 0.02 && particles.length < maxParticles) {
+    createFirework(Math.random() * fireworksCanvas.width, Math.random() * fireworksCanvas.height / 2);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+
+  requestAnimationFrame(drawFireworks);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .gallery-container img {
-    width: 90%;
-    height: auto;
-  }
+drawFireworks();
 
-  nav#navbar ul {
-    flex-direction: column;
-    gap: 15px;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 10px;
-    display: none;
-  }
+// Resize Fireworks Canvas on Window Resize
+window.addEventListener('resize', () => {
+  fireworksCanvas.width = window.innerWidth;
+  fireworksCanvas.height = window.innerHeight;
+});
 
-  nav#navbar ul.show {
-    display: flex;
-  }
+// Initialize Birthday Modal on Load
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("birthdayModal");
+  modal.classList.remove("hidden");
+  document.body.classList.add("modal-open");
+});
 
-  nav#navbar {
-    top: 10px;
-  }
-
-  .countdown-timers {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .chart-container {
-    width: 95%;
-  }
+// Close Birthday Modal Function
+function closeBirthdayModal() {
+  const modal = document.getElementById("birthdayModal");
+  modal.classList.add("hidden");
+  document.body.classList.remove("modal-open");
 }
+
+// Play Music Button Functionality
+const playMusicButton = document.getElementById('playMusicButton');
+const backgroundMusic = document.getElementById('backgroundMusic');
+
+playMusicButton.addEventListener('click', () => {
+  backgroundMusic.play();
+  playMusicButton.style.display = 'none';
+});
