@@ -20,12 +20,6 @@ body {
   display: none;
 }
 
-/* Show Modal Class */
-.modal.show .modal-content {
-  opacity: 1;
-  transform: scale(1);
-}
-
 /* Play Music Button Styles */
 .play-music-button {
   position: fixed;
@@ -236,13 +230,9 @@ footer {
   padding: 10px;
   border-radius: 5px;
   margin-top: 5px;
-  color: #ffcc00; /* More vibrant color */
+  color: #333;
   font-size: 1rem;
   transition: background-color 0.3s, transform 0.3s;
-}
-
-.interactive-message .hidden {
-  /* Additional styles if needed */
 }
 
 .interactive-message:hover .visible {
@@ -253,6 +243,11 @@ footer {
 .interactive-message:hover .hidden {
   display: block;
   animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Typewriter Effect */
@@ -279,7 +274,7 @@ footer {
   border-radius: 5px;
   color: white;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: background-color 0.3s;
 }
 
 .surprise-button:hover {
@@ -334,71 +329,27 @@ footer {
 }
 
 /* Happy Birthday Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.modal-content {
+#birthdayModal .modal-content {
   background: linear-gradient(135deg, #ffffff, #f0f0f0);
   border-radius: 15px;
-  padding: 20px;
-  width: 90%;
-  max-width: 600px;
-  position: relative;
-  text-align: center;
-  color: #333;
-  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   transform: scale(0.9);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
 }
 
-.modal.show .modal-content {
-  opacity: 1;
+.modal-open .modal-content {
   transform: scale(1);
+  opacity: 1;
 }
 
-.modal-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  font-family: 'Pacifico', cursive;
-  color: #ff69b4;
-}
-
-.modal-text {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+.interactive-explanations {
+  margin: 20px 0;
 }
 
 .interactive-explanations p {
   margin: 10px 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #555;
-}
-
-.close-button {
-  padding: 10px 20px;
-  background-color: #1e90ff;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.close-button:hover {
-  background-color: #3742fa;
 }
 
 /* Fireworks Canvas */
@@ -412,6 +363,9 @@ footer {
   z-index: 5;
 }
 
+/* Modal Content Animations */
+/* Already defined above */
+
 /* Bounce Animation */
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
@@ -424,11 +378,9 @@ footer {
     transform: translateY(-10px);
   }
 }
-
 .animate-bounce {
   animation: bounce 1s infinite;
 }
-
 .animate-bounce-delay {
   animation: bounce 1s infinite 0.2s;
 }
@@ -442,7 +394,6 @@ footer {
     transform: rotate(360deg);
   }
 }
-
 .animate-spin {
   animation: spin 2s linear infinite;
 }
@@ -456,7 +407,6 @@ footer {
     opacity: 0.5;
   }
 }
-
 .animate-pulse {
   animation: pulse 2s infinite;
 }
@@ -480,10 +430,28 @@ footer {
   }
 }
 
-/* Fade In */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Fade In Down */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive Design */
@@ -517,10 +485,5 @@ footer {
 
   .chart-container {
     width: 95%;
-  }
-
-  .modal-content {
-    width: 90%;
-    max-width: 90%;
   }
 }
