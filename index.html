@@ -408,12 +408,16 @@
       }
 
       .swiper-container {
-        height: 250px;
+        height: 250px; /* Reduced height for mobile */
+        max-width: 100%; /* Override max-width */
+        padding-left: 1rem; /* Add horizontal padding */
+        padding-right: 1rem;
       }
 
       /* Adjust Love Quote Rotator for Mobile */
       #loveQuotes {
         padding: 15px;
+        max-width: 100%; /* Override max-width */
       }
 
       #loveQuotes h3 {
@@ -423,6 +427,20 @@
       #loveQuotes p {
         font-size: 1rem;
       }
+
+      /* Adjust Interactive Messages for Mobile */
+      .interactive-message {
+        max-width: 100%; /* Override max-width */
+        padding-left: 1rem; /* Add horizontal padding */
+        padding-right: 1rem;
+      }
+
+      /* Adjust Love Story Section for Mobile */
+      #loveStory {
+        max-width: 100%; /* Override max-width */
+        padding-left: 1rem; /* Add horizontal padding */
+        padding-right: 1rem;
+      }
     }
 
     /* Love Quote Rotator Styles */
@@ -431,6 +449,8 @@
       border: 2px solid #ffcccc;
       border-radius: 10px;
       padding: 20px;
+      max-width: 800px; /* Original max-width */
+      margin: 0 auto; /* Center horizontally */
     }
 
     #loveQuotes h3 {
@@ -478,8 +498,8 @@
       border: 2px solid #ffcccc;
       border-radius: 10px;
       padding: 20px;
-      max-width: 800px;
-      margin: 20px auto;
+      max-width: 800px; /* Original max-width */
+      margin: 20px auto; /* Center horizontally */
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
