@@ -366,23 +366,46 @@ window.addEventListener('resize', () => {
 
 // Initialize Birthday Modal on Load
 document.addEventListener("DOMContentLoaded", function () {
-  const modal = document.getElementById("birthdayModal");
-  modal.classList.remove("hidden");
-  document.body.classList.add("modal-open");
+  const birthdayModal = document.getElementById("birthdayModal");
+  const rulesModal = document.getElementById("rulesModal");
+
+  // Open Birthday Modal
+  birthdayModal.classList.remove("hidden");
+
+  // Open Rules Modal
+  rulesModal.classList.remove("hidden");
 });
 
 // Close Birthday Modal Function
 function closeBirthdayModal() {
   const modal = document.getElementById("birthdayModal");
   modal.classList.add("hidden");
-  document.body.classList.remove("modal-open");
 }
+
+// Close Rules Modal Function
+function closeRulesModal() {
+  const rulesModal = document.getElementById("rulesModal");
+  rulesModal.classList.add("hidden");
+}
+
+// Event Listeners for Rules Modal
+const closeRulesButton = document.getElementById('closeRulesButton');
+const modalClose = document.querySelector('.modal-close');
+
+closeRulesButton.addEventListener('click', closeRulesModal);
+modalClose.addEventListener('click', closeRulesModal);
 
 // Play Music Button Functionality
 const playMusicButton = document.getElementById('playMusicButton');
 const backgroundMusic = document.getElementById('backgroundMusic');
 
 playMusicButton.addEventListener('click', () => {
-  backgroundMusic.play();
-  playMusicButton.style.display = 'none';
+  backgroundMusic.play()
+    .then(() => {
+      // Auto-play started
+      playMusicButton.style.display = 'none';
+    })
+    .catch((error) => {
+      console.error('Error playing audio:', error);
+    });
 });
