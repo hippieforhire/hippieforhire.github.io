@@ -183,34 +183,34 @@
   </footer>
 
   <!-- Happy Birthday Modal -->
-  <div id="birthdayModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 text-black w-full max-w-xl relative modal-content">
-      <h2 class="text-4xl fun-font text-center mb-4">
-        <span class="animate-bounce inline-block">H</span>
-        <span class="animate-bounce-delay inline-block">a</span>
-        <span class="animate-bounce-delay inline-block">p</span>
-        <span class="animate-bounce-delay inline-block">p</span>
-        <span class="animate-bounce-delay inline-block">y</span>
-        <span class="inline-block"> </span>
-        <span class="animate-bounce inline-block">B</span>
-        <span class="animate-bounce-delay inline-block">d</span>
-        <span class="animate-bounce-delay inline-block">a</span>
-        <span class="inline-block">y!</span>
-        <span class="inline-block"> </span>
-        <span class="animate-bounce inline-block">Z</span>
-        <span class="animate-bounce-delay inline-block">a</span>
-        <span class="animate-bounce-delay inline-block">c</span>
-        <span class="animate-bounce-delay inline-block">h</span>
-        <span class="inline-block">❤️</span>
+  <div id="birthdayModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">
+        <span class="animate-bounce">H</span>
+        <span class="animate-bounce-delay">a</span>
+        <span class="animate-bounce-delay">p</span>
+        <span class="animate-bounce-delay">p</span>
+        <span class="animate-bounce-delay">y</span>
+        <span> </span>
+        <span class="animate-bounce">B</span>
+        <span class="animate-bounce-delay">d</span>
+        <span class="animate-bounce-delay">a</span>
+        <span>y!</span>
+        <span> </span>
+        <span class="animate-bounce">Z</span>
+        <span class="animate-bounce-delay">a</span>
+        <span class="animate-bounce-delay">c</span>
+        <span class="animate-bounce-delay">h</span>
+        <span>❤️</span>
       </h2>
-      <p class="text-lg text-gray-600 text-center">Happy 33rd birthday Skye! I love you so much and I hope you have a great day and weekend. Another year of us turning older together, and I wouldn't change a thing. I can't wait to see where the next chapter takes us!</p>
+      <p class="modal-text">Happy 33rd birthday Skye! I love you so much and I hope you have a great day and weekend. Another year of us turning older together, and I wouldn't change a thing. I can't wait to see where the next chapter takes us!</p>
       <div class="interactive-explanations">
         <p>You deserve all the happiness in the world</p>
         <p>I hope #33 is the best one yet!</p>
         <p>You are such an amazing person.</p>
       </div>
-      <div class="text-center mt-6">
-        <button class="px-6 py-3 bg-blue-600 rounded-lg hover:bg-blue-500 text-white" onclick="closeBirthdayModal()">Close</button>
+      <div class="modal-close">
+        <button class="close-button" onclick="closeBirthdayModal()">Close</button>
       </div>
     </div>
   </div>
