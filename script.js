@@ -135,11 +135,14 @@ navbar.addEventListener('click', (e) => {
 const interactiveMessages = document.querySelectorAll('.interactive-message');
 
 interactiveMessages.forEach(message => {
-  message.addEventListener('mouseenter', () => {
-    message.querySelector('.hidden').style.display = 'block';
-  });
-  message.addEventListener('mouseleave', () => {
-    message.querySelector('.hidden').style.display = 'none';
+  // Use click instead of hover for better mobile compatibility
+  message.addEventListener('click', () => {
+    const hidden = message.querySelector('.hidden');
+    if (hidden.style.display === 'block') {
+      hidden.style.display = 'none';
+    } else {
+      hidden.style.display = 'block';
+    }
   });
 });
 
@@ -155,21 +158,11 @@ const typed = new Typed('#typewriter', {
 
 // Surprise Buttons Functionality
 const surpriseButtons = document.querySelectorAll('.surprise-button');
-const surpriseMessages = [
-  "I love you more than anything in the world. You mean so much to me Skye, and I will always try my hardest to be the best man I can for you and Addy.",
-  "I can’t believe I get to share this life with you, and I always look forward to whatever the next adventure will bring.",
-  "You are so funny, beautiful and wonderful.",
-  "I love your blue eyes",
-  "I love your smile",
-  "I love your Sim house building skills",
-  "I love your city planning abilities in Cities Skylines",
-  "You may not be the best at carrying a Domino’s pizza out of the car, but that’s okay with me ❤️",
-  "You have a pretty cute butt too."
-];
 
-surpriseButtons.forEach((button, index) => {
+surpriseButtons.forEach(button => {
   button.addEventListener('click', () => {
-    alert(surpriseMessages[index]);
+    const message = button.getAttribute('data-message');
+    alert(message);
   });
 });
 
@@ -178,7 +171,7 @@ const threeDContainer = document.getElementById('threeDContainer');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, threeDContainer.clientWidth / threeDContainer.clientHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(300, 150);
+renderer.setSize(threeDContainer.clientWidth, threeDContainer.clientHeight);
 threeDContainer.appendChild(renderer.domElement);
 
 // Add 3D Text
@@ -186,12 +179,12 @@ const loader = new THREE.FontLoader();
 loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
   const geometry = new THREE.TextGeometry('I love you Skye!', {
     font: font,
-    size: 1,
-    height: 0.2,
+    size: 0.5,
+    height: 0.1,
     curveSegments: 12,
     bevelEnabled: true,
-    bevelThickness: 0.03,
-    bevelSize: 0.05,
+    bevelThickness: 0.02,
+    bevelSize: 0.04,
     bevelOffset: 0,
     bevelSegments: 5
   });
@@ -202,19 +195,18 @@ loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json
 
   // Add Heart
   const heartShape = new THREE.Shape();
+
   heartShape.moveTo(0, 0);
-  heartShape.bezierCurveTo(0, 0, 0, 1, 1, 1);
-  heartShape.bezierCurveTo(1, 1, 2, 1, 2, 0);
-  heartShape.bezierCurveTo(2, -1, 1, -2, 0, -1);
-  heartShape.bezierCurveTo(-1, -2, -2, -1, -2, 0);
-  heartShape.bezierCurveTo(-2, 1, -1, 1, -1, 1);
-  heartShape.bezierCurveTo(-1, 1, 0, 1, 0, 0);
+  heartShape.bezierCurveTo(0, 0.5, 1, 1.5, 2, 0);
+  heartShape.bezierCurveTo(2, -1, 1, -1.5, 0, -1);
+  heartShape.bezierCurveTo(-1, -1.5, -2, -1, -2, 0);
+  heartShape.bezierCurveTo(-2, 1, -1, 1.5, 0, 1);
 
   const heartGeometry = new THREE.ShapeGeometry(heartShape);
   const heartMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
   const heart = new THREE.Mesh(heartGeometry, heartMaterial);
   heart.scale.set(0.5, 0.5, 0.5);
-  heart.position.set(-2, -1.5, 0);
+  heart.position.set(-1.5, -1, 0);
   scene.add(heart);
 
   camera.position.z = 5;
