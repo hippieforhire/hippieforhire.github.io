@@ -328,18 +328,40 @@ footer {
   margin: 30px auto;
 }
 
-/* Happy Birthday Modal */
-#birthdayModal {
-  /* Already styled in index.html and script.js */
-}
-
 /* Rules Explanation Modal */
 #rulesModal {
-  /* Styles are handled in index.html and script.js */
+  /* Already styled in index.html and script.js */
 }
 
 .modal-content {
   /* Common modal content styles */
+}
+
+.modal-close {
+  /* Styles for the close (×) button */
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #6b7280;
+  transition: color 0.3s;
+}
+
+.modal-close:hover {
+  color: #374151;
+}
+
+/* Wordle Cell Styles */
+.wordle-cell {
+  /* Using text to display "Happy", "Bday!", "Zach❤️" */
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 0 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
 }
 
 /* Animated Letters in Birthday Modal */
@@ -395,72 +417,6 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Rules Modal Specific Styles */
-.modal {
-  /* Ensures the modal covers the entire viewport and centers content */
-}
-
-.modal-content {
-  /* Styles specific to the modal content */
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 600px;
-  width: 90%;
-  position: relative;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.modal-close {
-  /* Styles for the close (×) button */
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  color: #6b7280;
-  transition: color 0.3s;
-}
-
-.modal-close:hover {
-  color: #374151;
-}
-
-/* Wordle Cell Styles */
-.wordle-cell {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #d1d5db; /* Tailwind gray-300 equivalent */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s, border-color 0.3s;
-  background-color: white;
-  border-radius: 5px;
-  margin: 0 2px;
-}
-
-.wordle-cell.correct {
-  background-color: #10b981; /* Tailwind green-500 */
-  border-color: #10b981;
-  color: white;
-}
-
-.wordle-cell.present {
-  background-color: #f59e0b; /* Tailwind amber-500 */
-  border-color: #f59e0b;
-  color: white;
-}
-
-.wordle-cell.absent {
-  background-color: #9ca3af; /* Tailwind gray-400 */
-  border-color: #9ca3af;
-  color: white;
 }
 
 /* Responsive Design */
