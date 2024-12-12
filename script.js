@@ -367,8 +367,6 @@ window.addEventListener('resize', () => {
 // Initialize Rules Modal on Load
 document.addEventListener("DOMContentLoaded", function () {
   const rulesModal = document.getElementById("rulesModal");
-
-  // Open Rules Modal
   rulesModal.classList.remove("hidden");
 });
 
