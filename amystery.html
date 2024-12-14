@@ -129,7 +129,6 @@
       100% {transform:translate(-50%,-10px) rotate(360deg);}
     }
 
-    /* Change spinning "Z" to "?" */
     .z-logo {
       animation: spin 10s linear infinite;
     }
@@ -171,9 +170,18 @@
         <text x="10" y="70" font-family="'Press Start 2P', cursive" font-size="70" fill="#10b981">?</text>
       </svg>
     </div>
-    <!-- Title changed to "a tall cat will go racing" -->
+    <!-- Title changed to "Cool Watch Go Agile" -->
     <h1>Cool Watch Go Agile</h1>
   </header>
+
+  <!-- Anagram Puzzle Section (New) -->
+  <div id="anagramPuzzle" class="flex flex-col items-center justify-center mb-6 p-4 bg-white rounded shadow-lg max-w-md w-full z-10 relative">
+    <h2 class="text-xl font-semibold mb-4 text-gray-700">Solve this Anagram before starting:</h2>
+    <p class="mb-2 text-center text-lg text-gray-700 font-bold">"Cool Watch Go Agile"</p>
+    <input id="anagramInput" type="text" placeholder="Enter the unscrambled phrase" class="border border-gray-300 p-2 rounded w-full mb-2 text-center" />
+    <button id="solveAnagramButton" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition transform hover:scale-105 shadow">Solve</button>
+    <p id="anagramMessage" class="mt-2 text-center"></p>
+  </div>
 
   <!-- Game Container -->
   <div class="game-container flex flex-col items-center bg-white p-6 rounded-lg shadow-lg max-w-md w-full z-10 relative">
@@ -189,7 +197,6 @@
     <div id="roundIndicator" class="text-sm">Round 1</div>
 
     <!-- Theme Display -->
-    <!-- Just regular text: "What is your surprise?" -->
     <div id="themeDisplay" class="theme-text">Theme: <span id="themeLetters">What is your surprise?</span></div>
 
     <!-- On-Screen Keyboard -->
@@ -229,10 +236,8 @@
     <div class="modal-content relative">
       <span class="modal-close">&times;</span>
       <h2 class="modal-header mb-4">How to Play</h2>
-      <!-- Instructions changed as requested -->
       <p class="mb-6 text-center">Guess the secret word, based on the theme. There are 3 rounds. The answers are clues.</p>
-      <!-- Example Tiles changed -->
-      <!-- Whats -->
+      <!-- Example Tiles -->
       <div class="mb-6">
         <div class="flex space-x-2 justify-center mb-2">
           <div class="wordle-cell correct animate-flip animate-bounce">W</div>
@@ -243,7 +248,6 @@
         </div>
         <p class="text-center">I have a surprise for you..</p>
       </div>
-      <!-- going -->
       <div class="mb-6">
         <div class="flex space-x-2 justify-center mb-2">
           <div class="wordle-cell">G</div>
@@ -254,7 +258,6 @@
         </div>
         <p class="text-center">..but I’m not telling.</p>
       </div>
-      <!-- on??? -->
       <div class="mb-6">
         <div class="flex space-x-2 justify-center mb-2">
           <div class="wordle-cell">O</div>
@@ -266,7 +269,6 @@
         <p class="text-center">Maybe you can guess the answer by looking around.</p>
       </div>
 
-      <!-- Change "Got It!" to "Ugh Fine" -->
       <button id="closeRulesButton" class="mt-4 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition transform hover:scale-105 shadow">
         Ugh Fine
       </button>
@@ -274,9 +276,6 @@
   </div>
 
   <!-- yetanotherwordlegame.js script -->
-  <script>
-    // We will provide the updated yetanotherwordlegame.js below
-  </script>
   <script src="js/yetanotherwordlegame.js"></script>
 </body>
 </html>
