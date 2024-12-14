@@ -14,18 +14,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressBar = document.getElementById('progressBar');
   const resetButton = document.getElementById('resetButton');
 
-  // Static setup: single theme and single word, no daily/anagram logic
+  // Anagram puzzle solution
+  const anagramSolution = "a tall cat will go racing".toLowerCase();
+
+  // Get references to the puzzle elements
+  const anagramPuzzle = document.getElementById('anagramPuzzle');
+  const anagramInput = document.getElementById('anagramInput');
+  const solveAnagramButton = document.getElementById('solveAnagramButton');
+  const anagramMessage = document.getElementById('anagramMessage');
+
+  // Disable Start Game button until puzzle solved
+  startWordleButton.disabled = true;
+  startWordleButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+  solveAnagramButton.addEventListener('click', () => {
+    const userAnswer = anagramInput.value.trim().toLowerCase();
+    if (userAnswer === anagramSolution) {
+      anagramMessage.textContent = "Correct! You may now start the game.";
+      anagramMessage.classList.remove('text-red-600');
+      anagramMessage.classList.add('text-green-600');
+      startWordleButton.disabled = false;
+      startWordleButton.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else {
+      anagramMessage.textContent = "Incorrect! Try again.";
+      anagramMessage.classList.remove('text-green-600');
+      anagramMessage.classList.add('text-red-600');
+    }
+  });
+
+  // Static setup: single theme and single word
   const theme = "What is your surprise?";
-  const secretWord = "chcgo"; // single solution word
+  const secretWord = "chcgo";
   const wordLength = secretWord.length;
   let maxGuesses = 6;
   let guesses = [];
   let currentGuess = '';
   let gameOver = false;
   let usedPowerUp = false;
-  const totalRounds = 3; // You can keep rounds as per instructions
-  let currentRound = 0; // If you want to maintain the round logic
-  // No anagram logic or dailyGames
+  const totalRounds = 3;
+  let currentRound = 0;
 
   function initializeWordleGame() {
     usedPowerUp = false;
@@ -293,12 +320,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function proceedToNextRound(won) {
-    // Since we removed daily logic, we can simply end the game
+    // End game logic since static
     gameOver = true;
   }
 
   function saveGameState(won) {
-    // Save simple state
     localStorage.setItem('wordle_last_played', 'static-game');
     localStorage.setItem('wordle_won', won);
   }
