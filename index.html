@@ -586,6 +586,7 @@
       <li><a href="#overlayMessage" class="text-lg font-medium hover:text-pink-500">Home</a></li>
       <li><a href="#loveQuotes" class="text-lg font-medium hover:text-pink-500">Quotes</a></li>
       <li><a href="#loveStory" class="text-lg font-medium hover:text-pink-500">To Skye</a></li>
+      <li><a href="amystery.html" class="text-lg font-medium hover:text-pink-500">A Mystery?</a></li>
     </ul>
   </nav>
 
@@ -1077,7 +1078,6 @@
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        // Responsive breakpoints can be added if needed
       });
 
       // Love Quote Rotator
@@ -1105,23 +1105,16 @@
       const quoteElement = document.getElementById('currentQuote');
 
       function showNextQuote() {
-        // Fade out the current quote
         quoteElement.style.opacity = 0;
 
         setTimeout(() => {
-          // Update the quote index
           currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-          // Update the quote text
           quoteElement.textContent = quotes[currentQuoteIndex];
-          // Fade in the new quote
           quoteElement.style.opacity = 1;
-        }, 1000); // Duration matches the CSS transition
+        }, 1000);
       }
 
-      // Initialize the first quote opacity
       quoteElement.style.opacity = 1;
-
-      // Change quote every 5 seconds
       setInterval(showNextQuote, 5000);
 
       // Confetti Animation
@@ -1136,7 +1129,6 @@
           confetti.style.backgroundColor = getRandomColor();
           confettiContainer.appendChild(confetti);
 
-          // Remove confetti after animation ends
           confetti.addEventListener('animationend', () => {
             confetti.remove();
           });
@@ -1148,14 +1140,10 @@
         return colors[Math.floor(Math.random() * colors.length)];
       }
 
-      // Optional: Remove confetti container after some time
       setInterval(() => {
         const confettiContainer = document.getElementById('confettiContainer');
         confettiContainer.innerHTML = '';
       }, 5000);
-
-      // Initialize Swiper Carousel with slidesPerView:1
-      // (Already initialized above)
 
       // Music Control Button Functionality
       const backgroundMusic = document.getElementById('backgroundMusic');
