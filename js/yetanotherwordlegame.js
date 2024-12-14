@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Static setup: single theme and single word, no daily/anagram logic
   const theme = "What is your surprise?";
-  const secretWord = "atrip"; // single solution word
+  const secretWord = "chcgo"; // single solution word
   const wordLength = secretWord.length;
   let maxGuesses = 6;
   let guesses = [];
