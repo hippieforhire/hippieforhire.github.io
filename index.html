@@ -586,7 +586,6 @@
       <li><a href="#overlayMessage" class="text-lg font-medium hover:text-pink-500">Home</a></li>
       <li><a href="#loveQuotes" class="text-lg font-medium hover:text-pink-500">Quotes</a></li>
       <li><a href="#loveStory" class="text-lg font-medium hover:text-pink-500">To Skye</a></li>
-      <!-- Added "A Mystery?" link as requested -->
       <li><a href="amystery.html" class="text-lg font-medium hover:text-pink-500">A Mystery?</a></li>
     </ul>
   </nav>
@@ -622,10 +621,10 @@
           <img src="img/pic2.jpg" alt="Photo 2">
         </a>
       </div>
-      <!-- Slide 3 changed to IMG_3192.jpeg as requested -->
+      <!-- Slide 3 (Reverted back to pic3.jpg) -->
       <div class="swiper-slide">
-        <a href="img/IMG_3192.jpeg" data-lightbox="birthday-carousel">
-          <img src="img/IMG_3192.jpeg" alt="Photo 3">
+        <a href="img/pic3.jpg" data-lightbox="birthday-carousel">
+          <img src="img/pic3.jpg" alt="Photo 3">
         </a>
       </div>
       <!-- Slide 4 -->
@@ -652,10 +651,10 @@
           <img src="img/pic7.jpg" alt="Photo 7">
         </a>
       </div>
-      <!-- Slide 8 -->
+      <!-- Slide 8 replaced with IMG_3192.jpeg -->
       <div class="swiper-slide">
-        <a href="img/pic8.jpg" data-lightbox="birthday-carousel">
-          <img src="img/pic8.jpg" alt="Photo 8">
+        <a href="img/IMG_3192.jpeg" data-lightbox="birthday-carousel">
+          <img src="img/IMG_3192.jpeg" alt="Photo 8">
         </a>
       </div>
       <!-- Slide 9 -->
@@ -994,7 +993,6 @@
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
-      // Heart Class with Optional Position
       class Heart {
         constructor(x = Math.random() * canvas.width, y = canvas.height + 20) {
           this.x = x;
@@ -1025,14 +1023,12 @@
         }
       }
 
-      // Generate Hearts
       function generateHearts() {
         if (hearts.length < 100) {
           hearts.push(new Heart());
         }
       }
 
-      // Animate Hearts
       function animateHearts() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         hearts.forEach((heart, index) => {
@@ -1046,9 +1042,8 @@
 
       generateHearts();
       animateHearts();
-      setInterval(generateHearts, 500); // Add new hearts every 0.5 seconds
+      setInterval(generateHearts, 500);
 
-      // Interactive Heart Generation on Click
       canvas.addEventListener('click', (event) => {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
@@ -1061,11 +1056,10 @@
         hearts.push(heart);
       }
 
-      // Initialize Swiper Carousel with slidesPerView:1
       var swiper = new Swiper('.swiper-container', {
         loop: true,
-        slidesPerView: 1, // Ensures only one slide is visible
-        spaceBetween: 0,  // No space between slides
+        slidesPerView: 1,
+        spaceBetween: 0,
         autoplay: {
           delay: 3000,
           disableOnInteraction: false,
@@ -1080,7 +1074,6 @@
         },
       });
 
-      // Love Quote Rotator
       const quotes = [
         '"The greatest thing you\'ll ever learn is just to love and be loved in return." - Eden Ahbez',
         '"Love you to the moon and to Saturn." - Taylor Swift',
@@ -1117,7 +1110,6 @@
       quoteElement.style.opacity = 1;
       setInterval(showNextQuote, 5000);
 
-      // Confetti Animation
       function createConfetti() {
         const confettiContainer = document.getElementById('confettiContainer');
         const numberOfConfetti = 100;
@@ -1145,7 +1137,6 @@
         confettiContainer.innerHTML = '';
       }, 5000);
 
-      // Music Control Button Functionality
       const backgroundMusic = document.getElementById('backgroundMusic');
       const playPauseButton = document.getElementById('playPauseButton');
 
@@ -1159,9 +1150,7 @@
         }
       });
 
-      // Fade-In Animation on Scroll
       const fadeInSections = document.querySelectorAll('.fade-in-section');
-
       const observerOptions = {
         threshold: 0.1
       };
